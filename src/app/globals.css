@@ -1,3 +1,110 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+/* --------------------------------------- REGISTER ---------------------------------------  */
+
+/* class utils */
+.btn-show-password {
+  @apply -ml-10 text-lg text-customGray;
+}
+
+.btn-submit .spinner {
+  @apply w-5 h-5 border-4 border-t-4 border-gray-200 border-t-yellow-400 rounded-full my-1 animate-spin;
+}
+/* ------- */
+
+.register {
+  background: url(/img/bg-login-register.avif);
+  @apply relative min-h-screen bg-cover bg-center bg-no-repeat flex items-center justify-center;
+}
+
+.register::before {
+  content: "";
+  @apply absolute top-0 left-0 right-0 bottom-0 bg-opacity-95;
+  background-image: radial-gradient(circle, transparent, #000000);
+}
+
+.register .input-error {
+  @apply border-red-300 hover:border-red-500 focus:border-red-500 focus:shadow-custom-red;
+}
+
+.register .input-valid {
+  @apply border-gray-300 hover:border-blue-500 focus:border-blue-500 focus:shadow-custom-blue;
+}
+
+.register .error-message {
+  @apply ml-2 md:text-sm text-[12px]  text-red-500;
+}
+
+.register-form {
+  @apply relative bg-white rounded-md p-4 w-full max-w-sm md:max-w-md;
+}
+
+.register-form-title {
+  @apply text-center font-semibold text-2xl text-gray-800
+  flex flex-col justify-center items-center mt-3 mb-8;
+}
+
+.register-form-title .icon {
+  @apply p-2 rounded-full bg-customPink text-white text-2xl mb-2;
+}
+
+.register-form .form-input {
+  @apply w-full p-3 h-12 border rounded-md text-gray-700 mt-1 focus:ring-transparent;
+}
+
+.register-form .form-input::placeholder {
+  @apply text-gray-400 font-light;
+}
+
+.register .btn-submit {
+  @apply mt-6 shadow-md bg-customPink text-white py-3 px-6 rounded-md focus:outline-none w-full
+  flex items-center justify-center space-x-2;
+}
+
+.register .navigate {
+  @apply mt-5 mb-3 text-center;
+}
+
+.register .form-group label {
+  @apply font-medium ml-1;
+}
+
+/* ant design */
+.ant-picker .ant-picker-input input::placeholder {
+  @apply text-gray-400 font-light font-sans;
+}
+
+.ant-select {
+  @apply w-full min-w-20 h-12 mt-1;
+}
+
+.ant-select-selection-wrap .ant-select-selection-placeholder {
+  @apply text-gray-400 font-light font-sans text-[16px];
+}
+
+.ant-select-selection-wrap .ant-select-selection-item {
+  @apply text-gray-700 text-[16px];
+}
+
+/* alert */
+.register-alert-info {
+  @apply text-center py-5;
+}
+
+.register-alert-info .alert-icon {
+  @apply mx-auto mb-4 h-14 w-14;
+}
+
+.register-alert-info .title {
+  @apply mb-5 text-xl font-normal text-gray-500 dark:text-gray-400;
+}
+
+.register-alert-info .group-btn {
+  @apply flex justify-center gap-4;
+}
+
+.register-alert-info .group-btn .btn {
+  @apply p-5 rounded-md text-[16px];
+}
