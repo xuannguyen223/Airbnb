@@ -15,7 +15,7 @@ import {
 import Loading from "@/app/loading";
 import { HiOutlineExclamationCircle } from "react-icons/hi";
 import { FaRegCheckCircle } from "react-icons/fa";
-import { Modal, ModalHeader } from "flowbite-react";
+import { Modal } from "flowbite-react";
 import { handleRegisterAction } from "@/lib/features/auth/registerAction";
 
 const Register = () => {
@@ -190,11 +190,17 @@ const Register = () => {
                     <Field name="birthday">
                       {({ form }) => (
                         <DatePicker
+                          id="birthday"
                           name="birthday"
                           size="large"
                           format={"DD/MM/YYYY"}
                           maxDate={dayjs()}
                           placeholder="Chọn ngày sinh"
+                          value={
+                            formik.values.birthday
+                              ? dayjs(formik.values.birthday, "DD/MM/YYYY")
+                              : null
+                          }
                           className={"form-input"}
                           onChange={(date) => {
                             if (date === null) {
@@ -217,6 +223,7 @@ const Register = () => {
                       {({ form }) => (
                         <Select
                           defaultValue={true}
+                          value={formik.values.gender}
                           options={[
                             {
                               value: true,
@@ -277,7 +284,9 @@ const Register = () => {
           onClose={() => {
             if (isRegisterSuccess) {
               formik.resetForm();
+              console.log("formik.values", formik.values);
             }
+
             dispatch(handleOpenModalAlert(false));
           }}
           popup
