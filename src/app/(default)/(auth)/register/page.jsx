@@ -8,17 +8,30 @@ import Link from "next/link";
 import { DatePicker, Select, Button } from "antd";
 import dayjs from "dayjs";
 import { useDispatch, useSelector } from "react-redux";
-import { handleLoading } from "@/lib/features/auth/registerSlice";
+import {
+  handleLoading,
+  handleOpenModalAlert,
+} from "@/lib/features/auth/registerSlice";
 import Loading from "@/app/loading";
 import { HiOutlineExclamationCircle } from "react-icons/hi";
 import { FaRegCheckCircle } from "react-icons/fa";
 import { Modal, ModalHeader } from "flowbite-react";
+import { handleRegisterAction } from "@/lib/features/auth/registerAction";
 
 const Register = () => {
   const [passwordVisible, setPasswordVisible] = useState(false);
   const [pageLoading, setPageLoading] = useState(true);
   const dispatch = useDispatch();
   const submitLoading = useSelector((state) => state.registerSlice.loading);
+  const validationErr = useSelector(
+    (state) => state.registerSlice.validationErr
+  );
+  const openModalAlert = useSelector(
+    (state) => state.registerSlice.openModalAlert
+  );
+  const isRegisterSuccess = useSelector(
+    (state) => state.registerSlice.isRegisterSuccess
+  );
 
   // Validation Schema with Yup
   const validationSchema = Yup.object({
@@ -50,13 +63,12 @@ const Register = () => {
       password: "",
       phone: "",
       birthday: "",
-      gender: "", // true = male, false = female
+      gender: true, // true = male, false = female
     },
     validationSchema: validationSchema,
     onSubmit: (values) => {
-      console.log("values register: ", values);
-      //  dispatch data here
       dispatch(handleLoading(true));
+      dispatch(handleRegisterAction(values));
     },
   });
 
@@ -185,6 +197,10 @@ const Register = () => {
                           placeholder="Chọn ngày sinh"
                           className={"form-input"}
                           onChange={(date) => {
+                            if (date === null) {
+                              form.setFieldValue("birthday", "");
+                              return;
+                            }
                             const formatDate = dayjs(date.$d).format(
                               "DD/MM/YYYY"
                             );
@@ -200,7 +216,7 @@ const Register = () => {
                     <Field name="gender">
                       {({ form }) => (
                         <Select
-                          placeholder="Chọn giới tính"
+                          defaultValue={true}
                           options={[
                             {
                               value: true,
@@ -222,10 +238,14 @@ const Register = () => {
               </div>
 
               {/* Error validation from BE */}
-              <div className="err-mess-validation mt-7 flex text-red-500 text-sm bg-red-100/60 p-2 rounded-sm gap-1 items-center">
-                <HiOutlineExclamationCircle className="text-xl" />
-                Hello
-              </div>
+              {validationErr.isValidationErr ? (
+                <div className="err-mess-validation mt-7 flex text-red-500 text-sm bg-red-100/60 p-2 rounded-sm gap-1 items-center">
+                  <HiOutlineExclamationCircle className="text-xl" />
+                  {validationErr.message}
+                </div>
+              ) : (
+                <></>
+              )}
 
               {/* Submit Button */}
               <button
@@ -241,52 +261,80 @@ const Register = () => {
           </FormikProvider>
 
           <div className="navigate">
-            <p>
-              Bạn đã có tài khoản?
-              <Link
-                href="/login"
-                className="text-blue-600 hover:underline ml-1"
-              >
-                Đăng nhập
-              </Link>
-            </p>
+            Bạn đã có tài khoản?
+            <Link href="/login" className="text-blue-600 hover:underline ml-1">
+              Đăng nhập
+            </Link>
           </div>
         </div>
       </div>
       {/* BLOCK ALERT */}
       <div className="register-alert">
         <Modal
-          show={false}
+          show={openModalAlert}
           size="lg"
           className="-ml-3"
           onClose={() => {
-            console.log("close modal");
+            if (isRegisterSuccess) {
+              formik.resetForm();
+            }
+            dispatch(handleOpenModalAlert(false));
           }}
           popup
         >
           <Modal.Header />
           <Modal.Body>
             <div className="register-alert-info ">
-              {/* <FaRegCheckCircle className="alert-icon text-teal-300 " /> */}
-              <HiOutlineExclamationCircle className="alert-icon text-gray-400" />
-              {/* <h2 className="title">Đăng ký tài khoản thành công !</h2> */}
+              {isRegisterSuccess ? (
+                <FaRegCheckCircle className="alert-icon text-teal-300 " />
+              ) : (
+                <HiOutlineExclamationCircle className="alert-icon text-gray-400" />
+              )}
               <h2 className="title">
-                Đã có lỗi xảy ra trong quá trình đăng ký. Vui lòng thử lại sau!
+                {isRegisterSuccess
+                  ? "Đăng ký tài khoản thành công !"
+                  : "Đã có lỗi xảy ra trong quá trình đăng ký. Vui lòng thử lại sau !"}{" "}
               </h2>
               <div className="group-btn">
-                {/* <Link href={"/"}>
-                  <Button color="cyan" variant="outlined" className="btn">
-                    Trang Chủ
+                {isRegisterSuccess ? (
+                  <>
+                    <Link href={"/"}>
+                      <Button
+                        color="cyan"
+                        variant="outlined"
+                        className="btn"
+                        onClick={() => {
+                          dispatch(handleOpenModalAlert(false));
+                        }}
+                      >
+                        Trang Chủ
+                      </Button>
+                    </Link>
+                    <Link href={"/login"}>
+                      <Button
+                        color="cyan"
+                        variant="solid"
+                        className="btn"
+                        onClick={() => {
+                          dispatch(handleOpenModalAlert(false));
+                        }}
+                      >
+                        Đăng Nhập
+                      </Button>
+                    </Link>
+                  </>
+                ) : (
+                  <Button
+                    color="default"
+                    variant="solid"
+                    className="btn"
+                    onClick={() => {
+                      dispatch(handleOpenModalAlert(false));
+                    }}
+                  >
+                    Đóng
                   </Button>
-                </Link>
-                <Link href={"/login"}>
-                  <Button color="cyan" variant="solid" className="btn ">
-                    Dang Nhap
-                  </Button>
-                </Link> */}
-                <Button color="default" variant="solid" className="btn ">
-                  Dong
-                </Button>
+                )}
               </div>
             </div>
           </Modal.Body>
