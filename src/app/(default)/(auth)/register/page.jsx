@@ -11,12 +11,16 @@ import { useDispatch, useSelector } from "react-redux";
 import {
   handleLoading,
   handleOpenModalAlert,
+  handleValidationErr,
 } from "@/lib/features/auth/registerSlice";
 import Loading from "@/app/loading";
 import { HiOutlineExclamationCircle } from "react-icons/hi";
 import { FaRegCheckCircle } from "react-icons/fa";
 import { Modal } from "flowbite-react";
-import { handleRegisterAction } from "@/lib/features/auth/registerAction";
+import {
+  handleRegisterAction,
+  validationPayload,
+} from "@/lib/features/auth/registerAction";
 
 const Register = () => {
   const [passwordVisible, setPasswordVisible] = useState(false);
@@ -74,6 +78,9 @@ const Register = () => {
 
   useEffect(() => {
     setPageLoading(false);
+    if (!formik.dirty) {
+      dispatch(handleValidationErr(validationPayload(false, "")));
+    }
   }, []);
 
   if (pageLoading) {
@@ -246,7 +253,7 @@ const Register = () => {
 
               {/* Error validation from BE */}
               {validationErr.isValidationErr ? (
-                <div className="err-mess-validation mt-7 flex text-red-500 text-sm bg-red-100/60 p-2 rounded-sm gap-1 items-center">
+                <div className="err-mess-validation">
                   <HiOutlineExclamationCircle className="text-xl" />
                   {validationErr.message}
                 </div>

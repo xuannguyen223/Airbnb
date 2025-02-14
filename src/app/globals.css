@@ -84,6 +84,11 @@
   @apply font-medium ml-1;
 }
 
+.register .err-mess-validation,
+.login .err-mess-validation {
+  @apply mt-7 flex text-red-500 text-sm bg-red-100/60 p-2 rounded-sm gap-1 items-center;
+}
+
 /* ant design */
 .ant-picker .ant-picker-input input::placeholder {
   @apply text-gray-400 font-light font-sans;
@@ -123,4 +128,17 @@
 
 .register-alert-info .group-btn .btn {
   @apply p-5 rounded-md text-[16px];
+}
+
+/* Login */
+.login .rememberAccount {
+  @apply flex items-center gap-1;
+}
+
+.login .MdCheckBox {
+  @apply text-customPink text-xl;
+}
+
+.login .custom_icon {
+  @apply text-xl text-gray-300;
 }

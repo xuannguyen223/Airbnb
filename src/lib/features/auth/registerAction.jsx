@@ -7,7 +7,7 @@ import {
   handleValidationErr,
 } from "./registerSlice";
 
-const validationPayload = (isValidationErr, message) => {
+export const validationPayload = (isValidationErr, message) => {
   return {
     isValidationErr: isValidationErr,
     message: message,

@@ -2,26 +2,50 @@
 import { Field, useFormik, ErrorMessage, FormikProvider } from "formik";
 import * as Yup from "yup";
 import React, { useEffect, useState } from "react";
-import { VscLockSmall } from "react-icons/vsc";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 import Link from "next/link";
-import { DatePicker, Select, Button } from "antd";
-import dayjs from "dayjs";
 import { useDispatch, useSelector } from "react-redux";
+import Loading from "@/app/loading";
+import { FaRegCheckCircle } from "react-icons/fa";
+import { Modal } from "flowbite-react";
+import { FaUserLarge } from "react-icons/fa6";
+import { MdCheckBox } from "react-icons/md";
+import { RiCheckboxBlankLine } from "react-icons/ri";
+import { HiOutlineExclamationCircle } from "react-icons/hi";
 import {
   handleLoading,
   handleOpenModalAlert,
-} from "@/lib/features/auth/registerSlice";
-import Loading from "@/app/loading";
-import { HiOutlineExclamationCircle } from "react-icons/hi";
-import { FaRegCheckCircle } from "react-icons/fa";
-import { Modal, ModalHeader } from "flowbite-react";
-import { handleRegisterAction } from "@/lib/features/auth/registerAction";
+  handleRememberAccount,
+  handleValidationErr,
+} from "@/lib/features/auth/loginSlice";
+import {
+  decryptData,
+  handleLoginAction,
+  validationPayLoad,
+} from "@/lib/features/auth/loginAction";
+import { Button } from "antd";
+import { redirect, useRouter } from "next/navigation";
+import { EMAIL, PASSWORD } from "@/utils/constant";
 
 const Login = () => {
+  const router = useRouter();
   const [passwordVisible, setPasswordVisible] = useState(false);
   const [pageLoading, setPageLoading] = useState(true);
   const dispatch = useDispatch();
+  const rememberAccount = useSelector(
+    (state) => state.loginSlice.rememberAccount
+  );
+  const submitLoading = useSelector((state) => state.loginSlice.loading);
+  const openModalAlert = useSelector(
+    (state) => state.loginSlice.openModalAlert
+  );
+  const isLoginSuccess = useSelector(
+    (state) => state.loginSlice.isLoginSuccess
+  );
+  const validationErr = useSelector((state) => state.loginSlice.validationErr);
+  const navigateToHome = useSelector(
+    (state) => state.loginSlice.navigateToHome
+  );
 
   // Validation Schema with Yup
   const validationSchema = Yup.object({
@@ -31,22 +55,35 @@ const Login = () => {
     password: Yup.string().required("Mật khẩu không được bỏ trống !"),
   });
 
+  const email = localStorage.getItem(EMAIL) || "";
+  const encryptedPass = localStorage.getItem(PASSWORD);
+  const password = encryptedPass ? decryptData(encryptedPass) : "";
+
   // Formik setup
   const formik = useFormik({
     initialValues: {
-      email: "",
-      password: "",
+      email: rememberAccount ? email : "",
+      password: rememberAccount ? password : "",
     },
     validationSchema: validationSchema,
     onSubmit: (values) => {
-      // dispatch(handleLoading(true));
-      // dispatch(handleRegisterAction(values));
+      dispatch(handleLoading(true));
+      dispatch(handleLoginAction(values, rememberAccount));
     },
   });
 
   useEffect(() => {
     setPageLoading(false);
+    if (!formik.dirty) {
+      dispatch(handleValidationErr(validationPayLoad(false, "")));
+    }
   }, []);
+
+  useEffect(() => {
+    if (navigateToHome) {
+      router.push("/");
+    }
+  }, [navigateToHome]);
 
   if (pageLoading) {
     return <Loading />;
@@ -55,11 +92,11 @@ const Login = () => {
   return (
     <>
       {/* BLOCK MAIN */}
-      <div className="register">
-        <div className="register-form">
-          <div className="register-form-title">
+      <div className="login">
+        <div className="login-form">
+          <div className="login-form-title">
             <div className="icon">
-              <VscLockSmall />
+              <FaUserLarge />
             </div>
             <h1>Đăng Nhập</h1>
           </div>
@@ -117,17 +154,32 @@ const Login = () => {
                   />
                 </div>
                 {/* remember account */}
+                <div className="rememberAccount">
+                  <button
+                    type="button"
+                    onClick={() => {
+                      dispatch(handleRememberAccount(!rememberAccount));
+                    }}
+                  >
+                    {rememberAccount ? (
+                      <MdCheckBox className="MdCheckBox" />
+                    ) : (
+                      <RiCheckboxBlankLine className="custom_icon" />
+                    )}
+                  </button>
+                  <p>Nhớ tài khoản</p>
+                </div>
               </div>
 
               {/* Error validation from BE */}
-              {/* {validationErr.isValidationErr ? (
-                <div className="err-mess-validation mt-7 flex text-red-500 text-sm bg-red-100/60 p-2 rounded-sm gap-1 items-center">
+              {validationErr.isValidationErr ? (
+                <div className="err-mess-validation">
                   <HiOutlineExclamationCircle className="text-xl" />
                   {validationErr.message}
                 </div>
               ) : (
                 <></>
-              )} */}
+              )}
 
               {/* Submit Button */}
               <button
@@ -137,7 +189,7 @@ const Login = () => {
                   submitLoading ? "" : "hover:bg-red-500"
                 }`}
               >
-                {submitLoading ? <div className="spinner"></div> : "ĐĂNG KÝ"}
+                {submitLoading ? <div className="spinner"></div> : "ĐĂNG NHẬP"}
               </button>
             </form>
           </FormikProvider>
@@ -154,60 +206,32 @@ const Login = () => {
         </div>
       </div>
       {/* BLOCK ALERT */}
-      <div className="register-alert">
+      <div className="login-alert">
         <Modal
           show={openModalAlert}
           size="lg"
           className="-ml-3"
-          onClose={() => {
-            if (isRegisterSuccess) {
-              formik.resetForm();
-            }
-            dispatch(handleOpenModalAlert(false));
-          }}
           popup
+          onClose={() => {
+            !isLoginSuccess && dispatch(handleOpenModalAlert(false));
+          }}
         >
           <Modal.Header />
           <Modal.Body>
-            <div className="register-alert-info ">
-              {isRegisterSuccess ? (
+            <div className="login-alert-info ">
+              {isLoginSuccess ? (
                 <FaRegCheckCircle className="alert-icon text-teal-300 " />
               ) : (
                 <HiOutlineExclamationCircle className="alert-icon text-gray-400" />
               )}
               <h2 className="title">
-                {isRegisterSuccess
-                  ? "Đăng ký tài khoản thành công !"
-                  : "Đã có lỗi xảy ra trong quá trình đăng ký. Vui lòng thử lại sau !"}{" "}
+                {isLoginSuccess
+                  ? "Đăng nhập thành công ! Bạn sẽ được chuyển đến trang chủ"
+                  : "Đã có lỗi xảy ra trong quá trình đăng nhập. Vui lòng thử lại sau !"}{" "}
               </h2>
               <div className="group-btn">
-                {isRegisterSuccess ? (
-                  <>
-                    <Link href={"/"}>
-                      <Button
-                        color="cyan"
-                        variant="outlined"
-                        className="btn"
-                        onClick={() => {
-                          dispatch(handleOpenModalAlert(false));
-                        }}
-                      >
-                        Trang Chủ
-                      </Button>
-                    </Link>
-                    <Link href={"/login"}>
-                      <Button
-                        color="cyan"
-                        variant="solid"
-                        className="btn"
-                        onClick={() => {
-                          dispatch(handleOpenModalAlert(false));
-                        }}
-                      >
-                        Đăng Nhập
-                      </Button>
-                    </Link>
-                  </>
+                {isLoginSuccess ? (
+                  <></>
                 ) : (
                   <Button
                     color="default"
