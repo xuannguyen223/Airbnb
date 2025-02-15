@@ -1,17 +1,19 @@
 "use client";
 import { Field, useFormik, ErrorMessage, FormikProvider } from "formik";
 import * as Yup from "yup";
-import React, { useEffect, useState } from "react";
-import { FaEye, FaEyeSlash } from "react-icons/fa";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
+import { Button } from "antd";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import Loading from "@/app/loading";
-import { FaRegCheckCircle } from "react-icons/fa";
 import { Modal } from "flowbite-react";
+import { FaEye, FaEyeSlash, FaRegCheckCircle } from "react-icons/fa";
 import { FaUserLarge } from "react-icons/fa6";
 import { MdCheckBox } from "react-icons/md";
 import { RiCheckboxBlankLine } from "react-icons/ri";
 import { HiOutlineExclamationCircle } from "react-icons/hi";
+import Loading from "@/app/loading";
+import { EMAIL, PASSWORD } from "@/utils/constant";
 import {
   handleLoading,
   handleOpenModalAlert,
@@ -23,9 +25,6 @@ import {
   handleLoginAction,
   validationPayLoad,
 } from "@/lib/features/auth/loginAction";
-import { Button } from "antd";
-import { redirect, useRouter } from "next/navigation";
-import { EMAIL, PASSWORD } from "@/utils/constant";
 
 const Login = () => {
   const router = useRouter();

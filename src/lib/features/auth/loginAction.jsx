@@ -5,8 +5,7 @@ import {
   LOGIN_API,
   PASSWORD,
   REMEMBER_ACCOUNT,
-  SECRECT_KEY,
-  USER_NAME,
+  SRK,
 } from "@/utils/constant";
 import {
   handleLoading,
@@ -15,7 +14,6 @@ import {
   handleOpenModalAlert,
   handleValidationErr,
 } from "./loginSlice";
-import { stringify } from "postcss";
 import CryptoJS from "crypto-js";
 
 export const validationPayLoad = (isValidationErr, message) => {
@@ -26,12 +24,12 @@ export const validationPayLoad = (isValidationErr, message) => {
 };
 
 export const encryptData = (data) => {
-  const generateData = CryptoJS.AES.encrypt(data, SECRECT_KEY).toString();
+  const generateData = CryptoJS.AES.encrypt(data, SRK).toString();
   return generateData;
 };
 
 export const decryptData = (data) => {
-  const bytes = CryptoJS.AES.decrypt(data, SECRECT_KEY);
+  const bytes = CryptoJS.AES.decrypt(data, SRK);
   const originalData = bytes.toString(CryptoJS.enc.Utf8);
   return originalData;
 };
@@ -39,10 +37,8 @@ export const decryptData = (data) => {
 export const handleLoginAction = (values, rememberAccount) => {
   return async (dispatch, getState) => {
     const response = await authHttp.post(LOGIN_API, values);
-    console.log("response: ", response);
     dispatch(handleLoading(false));
     if (response.status === 200) {
-      console.log("response token: ", response.data.content.token);
       dispatch(handleOpenModalAlert(true));
       dispatch(handleLoginSuccess(true));
       setTimeout(() => {

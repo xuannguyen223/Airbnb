@@ -9,4 +9,4 @@ export const ACCESS_TOKEN = btoa("accessToken");
 export const EMAIL = btoa("email");
 export const PASSWORD = btoa("password");
 export const REMEMBER_ACCOUNT = btoa("rememberAccount");
-export const SECRECT_KEY = btoa("secret-key");
+export const SRK = btoa("airbnb");

@@ -47,5 +47,4 @@ export const {
   handleNavigateToHome,
 } = loginSlice.actions;
 
-// export default loginSlice;
 export default loginSlice.reducer;

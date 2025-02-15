@@ -1,22 +1,21 @@
 "use client";
 import { Field, useFormik, ErrorMessage, FormikProvider } from "formik";
 import * as Yup from "yup";
-import React, { useEffect, useState } from "react";
-import { VscLockSmall } from "react-icons/vsc";
-import { FaEye, FaEyeSlash } from "react-icons/fa";
-import Link from "next/link";
-import { DatePicker, Select, Button } from "antd";
 import dayjs from "dayjs";
+import { DatePicker, Select, Button } from "antd";
+import Link from "next/link";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { Modal } from "flowbite-react";
+import { VscLockSmall } from "react-icons/vsc";
+import { FaEye, FaEyeSlash, FaRegCheckCircle } from "react-icons/fa";
+import { HiOutlineExclamationCircle } from "react-icons/hi";
+import Loading from "@/app/loading";
 import {
   handleLoading,
   handleOpenModalAlert,
   handleValidationErr,
 } from "@/lib/features/auth/registerSlice";
-import Loading from "@/app/loading";
-import { HiOutlineExclamationCircle } from "react-icons/hi";
-import { FaRegCheckCircle } from "react-icons/fa";
-import { Modal } from "flowbite-react";
 import {
   handleRegisterAction,
   validationPayload,
