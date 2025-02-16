@@ -62,12 +62,14 @@ const ChiTietPhongThue = ({ idPhongThue, phongThue }) => {
 
   const daysBetween = calculateDaysBetween(startDate, endDate);
   const handleDatPhong = async () => {
-    const res = await http.post("/api/dat-phong", bodyDatPhong);
-    if (res.data.message === "Thêm mới thành công!") {
-      alert("Bạn đã đặt phòng thành công");
-      setStartDate(null);
-      setEndDate(null);
-      setLuongKhach(2);
+    if (startDate !== null && endDate !== null) {
+      const res = await http.post("/api/dat-phong", bodyDatPhong);
+      if (res.data.message === "Thêm mới thành công!") {
+        alert("Bạn đã đặt phòng thành công");
+        setStartDate(null);
+        setEndDate(null);
+        setLuongKhach(2);
+      }
     } else {
       alert("Bạn vẫn chưa chọn ngày bắt đầu và kết thúc");
     }
