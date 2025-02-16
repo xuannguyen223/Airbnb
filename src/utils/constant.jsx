@@ -10,3 +10,6 @@ export const EMAIL = btoa("email");
 export const PASSWORD = btoa("password");
 export const REMEMBER_ACCOUNT = btoa("rememberAccount");
 export const SRK = btoa("airbnb");
+export const USER_ID = btoa("userID");
+export const USER_API = "/api/users";
+export const BADGE_AWARDED = "badgeAwarded";

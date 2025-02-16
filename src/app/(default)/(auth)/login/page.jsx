@@ -13,7 +13,7 @@ import { MdCheckBox } from "react-icons/md";
 import { RiCheckboxBlankLine } from "react-icons/ri";
 import { HiOutlineExclamationCircle } from "react-icons/hi";
 import Loading from "@/app/loading";
-import { EMAIL, PASSWORD } from "@/utils/constant";
+import { EMAIL, PASSWORD, REMEMBER_ACCOUNT } from "@/utils/constant";
 import {
   handleLoading,
   handleOpenModalAlert,
@@ -54,15 +54,11 @@ const Login = () => {
     password: Yup.string().required("Mật khẩu không được bỏ trống !"),
   });
 
-  const email = localStorage.getItem(EMAIL) || "";
-  const encryptedPass = localStorage.getItem(PASSWORD);
-  const password = encryptedPass ? decryptData(encryptedPass) : "";
-
   // Formik setup
   const formik = useFormik({
     initialValues: {
-      email: rememberAccount ? email : "",
-      password: rememberAccount ? password : "",
+      email: "",
+      password: "",
     },
     validationSchema: validationSchema,
     onSubmit: (values) => {
@@ -72,10 +68,21 @@ const Login = () => {
   });
 
   useEffect(() => {
-    setPageLoading(false);
+    const isRememberAccount = JSON.parse(
+      localStorage.getItem(REMEMBER_ACCOUNT)
+    );
+    if (isRememberAccount) {
+      dispatch(handleRememberAccount(true));
+      const email = localStorage.getItem(EMAIL) || "";
+      const encryptedPass = localStorage.getItem(PASSWORD);
+      const password = encryptedPass ? decryptData(encryptedPass) : "";
+      formik.setFieldValue("email", email);
+      formik.setFieldValue("password", password);
+    }
     if (!formik.dirty) {
       dispatch(handleValidationErr(validationPayLoad(false, "")));
     }
+    setPageLoading(false);
   }, []);
 
   useEffect(() => {

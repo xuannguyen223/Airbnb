@@ -6,6 +6,7 @@ import {
   PASSWORD,
   REMEMBER_ACCOUNT,
   SRK,
+  USER_ID,
 } from "@/utils/constant";
 import {
   handleLoading,
@@ -49,6 +50,7 @@ export const handleLoginAction = (values, rememberAccount) => {
       // Local Storage
       localStorage.setItem(ACCESS_TOKEN, response.data.content.token);
       localStorage.setItem(REMEMBER_ACCOUNT, JSON.stringify(rememberAccount));
+      localStorage.setItem(USER_ID, response.data.content.user.id);
       if (rememberAccount) {
         localStorage.setItem(EMAIL, values.email);
         localStorage.setItem(PASSWORD, encryptData(values.password));

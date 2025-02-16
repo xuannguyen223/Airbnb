@@ -1,8 +1,7 @@
-import { REMEMBER_ACCOUNT } from "@/utils/constant";
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
-  rememberAccount: JSON.parse(localStorage.getItem(REMEMBER_ACCOUNT)) || false,
+  rememberAccount: false,
   loading: false,
   openModalAlert: false,
   isLoginSuccess: false,

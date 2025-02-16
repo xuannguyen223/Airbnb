@@ -1,5 +1,6 @@
 /** @type {import('tailwindcss').Config} */
 import flowbite from "flowbite-react/tailwind";
+import { Container } from "postcss";
 
 export default {
   content: [

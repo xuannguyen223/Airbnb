@@ -142,3 +142,32 @@
 .login .custom_icon {
   @apply text-xl text-gray-300;
 }
+
+/* --------------------------------------- USER PROFILE ---------------------------------------  */
+
+.user-profile-banner {
+  background: url(/img/bg-user-profile.jpeg);
+  @apply bg-no-repeat bg-cover bg-bottom h-[50vh] lg:h-[40vh]
+    flex justify-center items-center relative pt-20 md:pt-10 lg:pt-0 
+    uppercase text-gray-100 tracking-wider text-lg md:text-xl lg:text-3xl;
+}
+
+.user-profile-banner::before {
+  content: "";
+  @apply absolute top-0 bottom-0 left-0 right-0 opacity-80;
+  background-image: linear-gradient(195deg, #4c4c4c, #191919);
+}
+
+.user-profile {
+  @apply py-5 px-7;
+}
+
+.user-profile .info-left {
+  @apply min-h-[30vh]
+  p-5 border border-gray-200 rounded-md flex flex-col;
+}
+
+.user-profile .info-right {
+  @apply min-h-[20vh] bg-orange-200
+  mt-12;
+}
