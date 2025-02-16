@@ -3,15 +3,20 @@ import React, { useEffect, useRef, useState } from "react";
 import axios from "axios";
 import { tokenCyberSoft } from "@/utils/constant";
 import { useRouter } from "next/navigation";
+import Image from "next/image";
+import { useDispatch, useSelector } from "react-redux";
+import { layViTriTongAction } from "@/lib/features/viTri/viTriTongReducer";
+
 const SearchComponent = () => {
-  const [query, setQuery] = useState("");
+  const [inputValue, setInputValue] = useState("");
   const [isOpen, setIsOpen] = useState(false);
-  const [suggestions, setSuggetions] = useState([]);
+  const viTriTong = useSelector((state) => state.viTriTongReducer.viTriTong);
   const DropdownSearch = useRef(null);
   const [viTri, setViTri] = useState("");
   const [tinhThanh, setTinhThanh] = useState("");
   const router = useRouter();
-  const handleOnFocus = async () => {
+  const dispatch = useDispatch();
+  const layViTri = async () => {
     try {
       const res = await axios({
         url: "https://airbnbnew.cybersoft.edu.vn/api/vi-tri",
@@ -21,7 +26,21 @@ const SearchComponent = () => {
         },
       });
       console.log(res.data.content);
-      setSuggetions(res.data.content);
+      const action = layViTriTongAction(res.data.content);
+      dispatch(action);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+  const handleOnFocus = async () => {
+    try {
+      const res = await axios({
+        url: "https://airbnbnew.cybersoft.edu.vn/api/vi-tri",
+        method: "GET",
+        headers: {
+          tokenCybersoft: tokenCyberSoft,
+        },
+      });
       setIsOpen(true);
     } catch (error) {
       console.log(error);
@@ -29,7 +48,7 @@ const SearchComponent = () => {
   };
   const handleInputChange = (e) => {
     const value = e.target.value;
-    setQuery(value);
+    setInputValue(value);
   };
   const handleClickOutside = (event) => {
     if (
@@ -65,8 +84,8 @@ const SearchComponent = () => {
     };
   }, []);
   useEffect(() => {
-    console.log(suggestions);
-  }, [suggestions]);
+    layViTri();
+  }, []);
   return (
     <form
       onSubmit={handleSubmitSearch}
@@ -76,7 +95,7 @@ const SearchComponent = () => {
       <label className="relative group  hover:bg-[#EBEBEB] p-3 w-1/3 rounded-full pl-8 cursor-pointer">
         <div className="text-xs font-semibold">Địa điểm</div>
         <input
-          value={query}
+          value={inputValue}
           onChange={handleInputChange}
           onFocus={handleOnFocus}
           type="text"
@@ -88,12 +107,14 @@ const SearchComponent = () => {
         <div className="absolute top-[180px] z-50  p-4 rounded-lg border bg-white border-black border-opacity-25">
           <div className="mb-4">Tìm kiếm theo vị trí</div>
           <div className="h-64 overflow-y-scroll">
-            {suggestions?.map((suggestion, index) => {
+            {viTriTong?.map((suggestion, index) => {
               return (
                 <button
                   type="button"
                   onClick={() => {
-                    setQuery(suggestion.tenViTri + ` ${suggestion.tinhThanh}`);
+                    setInputValue(
+                      suggestion.tenViTri + ` ${suggestion.tinhThanh}`
+                    );
                     setViTri(convertToSlug(suggestion.tenViTri));
                     setTinhThanh(suggestion.tinhThanh);
                     setIsOpen(false);

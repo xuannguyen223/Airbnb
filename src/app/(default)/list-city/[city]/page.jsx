@@ -3,6 +3,7 @@ import { tinhThanhToIdMap, tinhThanhToSrcMap } from "@/utils/constant";
 import { http } from "@/services/interceptor/homeInterceptor";
 import SlickCarousel from "@/components/SlickCarousel";
 import Link from "next/link";
+
 const CityPage = async (props) => {
   const { city } = await props.params;
   const id = tinhThanhToIdMap[city];
