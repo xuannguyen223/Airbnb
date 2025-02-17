@@ -23,8 +23,8 @@ const CityPage = async (props) => {
 
   return (
     <div>
-      <div className="pt-8 container mx-auto flex">
-        <div className="w-1/2 relative z-0">
+      <div className="pt-8 container mx-auto flex flex-wrap">
+        <div className="w-[96%] lg:w-[58%] mx-auto relative z-0 ">
           <div className="text-3xl font-bold mb-4">
             {data.length > 0
               ? `Có ${data.length} chỗ ở tại vị trí bản đồ đã chọn`
@@ -62,11 +62,11 @@ const CityPage = async (props) => {
             );
           })}
         </div>
-        <div className="w-1/2 ml-4">
+        <div className="w-[96%] lg:w-[38%] mx-auto ">
           <iframe
             src={srcMap}
             width="600"
-            height="700"
+            height="600"
             style={{ border: 0 }}
             allowFullScreen=""
             loading="lazy"

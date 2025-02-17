@@ -163,15 +163,15 @@ const Footer = () => {
           <div className="flex justify-between items-center h-full ">
             <div className="text-black text-opacity-60">
               <span className="mx-2 ">© 2022 Airbnb, Inc</span>.
-              <span className="mx-2 hover:underline cursor-pointer">
+              <span className="mx-2 hover:underline cursor-pointer hidden xl:inline-block">
                 Quyền riêng tư
               </span>
               .
-              <span className="mx-2 hover:underline cursor-pointer">
+              <span className="mx-2 hover:underline cursor-pointer hidden xl:inline-block">
                 Điều khoản
               </span>
               .
-              <span className="mx-2 hover:underline cursor-pointer">
+              <span className="mx-2 hover:underline cursor-pointer hidden xl:inline-block">
                 Sơ đồ trang web
               </span>
             </div>
@@ -187,8 +187,10 @@ const Footer = () => {
               <span className="mx-2 hover:underline cursor-pointer">
                 Tiếng Việt
               </span>
-              <span className="mx-2 hover:underline cursor-pointer">USD</span>
-              <span className="mx-2 hover:underline cursor-pointer">
+              <span className="mx-2 hover:underline cursor-pointer hidden xl:inline-block">
+                USD
+              </span>
+              <span className="mx-2 hover:underline cursor-pointer hidden xl:inline-block">
                 Hỗ trợ tài nguyên
               </span>
             </div>
