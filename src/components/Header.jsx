@@ -6,12 +6,12 @@ import MenuButton from "./MenuButton";
 const Header = () => {
   return (
     <div
-      className="relative top-0 right-0 left-0 bg-cover bg-center bg-no-repeat h-[500px]"
+      className="relative top-0 right-0 left-0 bg-cover bg-center bg-no-repeat w-full h-[500px]"
       style={{ backgroundImage: `url('/airbnb.jpg')` }}
     >
-      <header className="fixed z-50 top-0 left-0 right-0 pb-5">
+      <header className="fixed z-50 top-0 left-0 right-0 pb-1 bg-white">
         <div className="container mx-auto">
-          <div className="flex justify-between items-center p-3 bg-white rounded-full border border-black border-opacity-25">
+          <div className="flex justify-between items-center p-3 bg-white ">
             <div className="logo">
               <a className="text-orange-500" href="/">
                 <div>
