@@ -12,6 +12,35 @@
 .btn-submit .spinner {
   @apply w-5 h-5 border-4 border-t-4 border-gray-200 border-t-yellow-400 rounded-full my-1 animate-spin;
 }
+
+.form-input {
+  @apply w-full p-3 h-12 border rounded-md text-gray-700 mt-1 focus:ring-transparent;
+}
+
+.form-input::placeholder {
+  @apply text-gray-400 font-light;
+}
+
+.err-mess-validation {
+  @apply mt-7 flex text-red-500 text-sm bg-red-100/60 p-2 rounded-sm gap-1 items-center;
+}
+
+.input-error {
+  @apply border-red-300 hover:border-red-500 focus:border-red-500 focus:shadow-custom-red;
+}
+
+.input-valid {
+  @apply border-gray-300 hover:border-blue-500 focus:border-blue-500 focus:shadow-custom-blue;
+}
+
+.input-disabled {
+  @apply border-gray-300 bg-gray-100;
+}
+
+.error-message {
+  @apply ml-2 md:text-sm text-[12px]  text-red-500;
+}
+
 /* ------- */
 
 .register,
@@ -148,7 +177,7 @@
 .user-profile-banner {
   background: url(/img/bg-user-profile.jpeg);
   @apply bg-no-repeat bg-cover bg-bottom h-[50vh] lg:h-[40vh]
-    flex justify-center items-center relative pt-20 md:pt-10 lg:pt-0 
+    flex justify-center items-center relative pt-20 md:pt-10 lg:pt-0
     uppercase text-gray-100 tracking-wider text-lg md:text-xl lg:text-3xl;
 }
 
@@ -159,15 +188,174 @@
 }
 
 .user-profile {
-  @apply py-5 px-7;
+  @apply py-5 px-7 xl:flex gap-10 container mx-auto;
 }
 
 .user-profile .info-left {
-  @apply min-h-[30vh]
-  p-5 border border-gray-200 rounded-md flex flex-col;
+  @apply min-w-96 max-h-[600px] p-5 border border-gray-200
+  rounded-md flex flex-col;
 }
 
 .user-profile .info-right {
-  @apply min-h-[20vh] bg-orange-200
-  mt-12;
+  @apply w-full mt-12 xl:mt-0;
+}
+
+/* info-right */
+
+.user-profile .info-right .title {
+  @apply text-2xl font-semibold;
+}
+
+.user-profile .info-right .time-join {
+  @apply my-4 text-gray-500 text-sm;
+}
+
+.user-profile .info-right .edit-profile {
+  @apply underline text-gray-700 hover:text-customPink;
+}
+
+.user-profile .info-right .rented-rooms-information {
+  @apply min-h-[50vh] text-lg;
+}
+
+.info-right .rented-rooms-information .title {
+  @apply my-3 text-2xl;
+}
+
+/* info-left */
+.user-profile .info-left .user-avatar {
+  @apply flex flex-col;
+}
+
+.info-left .user-avatar .avatar-default {
+  @apply text-9xl w-full my-3;
+}
+
+.info-left .user-avatar .avatar-upload {
+  @apply w-36 h-36 object-cover mx-auto rounded-full my-3;
+}
+
+.info-left .user-avatar .update-avatar {
+  @apply underline font-bold text-sm mt-2 hover:text-customPink;
+}
+
+.user-profile .info-left .verify-id .badge {
+  @apply flex items-center gap-2 text-xl font-bold mt-3;
+}
+
+.user-profile .info-left .verify-id p {
+  @apply text-sm my-7;
+}
+
+.info-left .verify-id .btn-award-badge {
+  @apply text-left mb-6 border border-gray-300 rounded-md w-fit py-1 px-3 text-sm;
+}
+
+.verify-id .btn-award-badge.false {
+  @apply hover:text-customPink hover:border-customPink duration-300 hover:shadow-custom-red;
+}
+
+.user-profile .info-left .verify-email .title {
+  @apply my-6 uppercase text-xl font-bold;
+}
+
+.user-profile .info-left .verify-email .info {
+  @apply flex gap-2 items-center;
+}
+
+/* Form Edit Profile */
+.user-info-title {
+  @apply text-2xl mb-8 capitalize;
+}
+
+.user-info-field {
+  @apply grid md:grid-cols-2 gap-y-5 gap-x-10;
+}
+
+.user-info-submit {
+  @apply flex justify-end mt-10 mb-3;
+}
+
+.user-info-submit .btn-submit {
+  @apply uppercase tracking-wider text-sm py-2 px-3 min-w-28
+  flex justify-center rounded-md duration-300
+  text-white bg-indigo-500;
+}
+
+/* Alert Update Info */
+.user-profile-alert {
+  @apply text-center py-5;
+}
+
+.user-profile-alert-info .alert-icon {
+  @apply mx-auto mb-4 h-14 w-14;
+}
+
+.user-profile-alert-info .title {
+  @apply mb-5 text-center text-xl font-normal text-gray-500 dark:text-gray-400;
+}
+
+.user-profile-alert-info .group-btn {
+  @apply flex justify-center gap-4;
+}
+
+.user-profile-alert-info .group-btn .btn {
+  @apply p-5 rounded-md text-[16px];
+}
+
+.modal-user-avatar {
+  @apply relative max-w-lg mx-auto my-12;
+}
+
+.modal-user-avatar .avatar {
+  @apply w-36 h-36 object-cover mx-auto rounded-full;
+}
+
+.modal-user-avatar .avatar-default {
+  @apply text-9xl w-full my-3 text-gray-700;
+}
+
+.modal-user-avatar .validation {
+  @apply ml-2 text-customPink mt-2;
+}
+
+/* room details */
+.rented-rooms-information .room-group {
+  @apply space-y-8 mt-6;
+}
+
+.rented-rooms-information .room {
+  @apply border border-gray-200 rounded-xl p-5 max-h-[450px]
+  md:flex gap-5 hover:shadow-xl transition-all;
+}
+
+.rented-rooms-information .room .img {
+  @apply w-full md:w-1/2 relative transition-all;
+}
+
+.rented-rooms-information .room .image {
+  @apply rounded-xl object-cover h-56 w-full;
+}
+
+.rented-rooms-information .room .info {
+  @apply relative mt-8 md:mt-0 text-gray-500 text-sm 2xl:text-[16px]
+  w-full md:w-1/2 lg:w-2/3 2xl:w-full;
+}
+
+.rented-rooms-information .room .info .room-name {
+  @apply text-xl 2xl:text-2xl text-black mt-1 overflow-hidden text-ellipsis whitespace-nowrap;
+}
+
+.rented-rooms-information .room .info hr {
+  @apply border-2 rounded-full w-1/6 mt-1 mb-2;
+}
+
+.rented-rooms-information .room .info .basic-info,
+.rented-rooms-information .room .info .plus-info {
+  @apply overflow-hidden text-ellipsis whitespace-nowrap;
+}
+
+.rented-rooms-information .room .info .price {
+  @apply flex justify-end mt-4 text-sm font-bold text-black
+  md:absolute right-0 bottom-0;
 }

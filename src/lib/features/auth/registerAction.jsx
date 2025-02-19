@@ -18,9 +18,9 @@ const preparePayloadForRegister = (data) => {
   const { username, email, password, phone, birthday, gender } = data;
   return {
     // id: new Date().getTime() % 1_000_000,
-    name: username,
-    email: email,
-    password: password,
+    name: username.trim(),
+    email: email.trim(),
+    password: password.trim(),
     phone: phone,
     birthday: birthday,
     gender: gender,

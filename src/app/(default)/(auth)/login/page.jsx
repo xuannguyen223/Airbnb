@@ -48,9 +48,7 @@ const Login = () => {
 
   // Validation Schema with Yup
   const validationSchema = Yup.object({
-    email: Yup.string()
-      .required("Email không được bỏ trống !")
-      .email("Email không hợp lệ !"),
+    email: Yup.string().required("Email không được bỏ trống !"),
     password: Yup.string().required("Mật khẩu không được bỏ trống !"),
   });
 
