@@ -1,5 +1,4 @@
-    import { GET_ROOM_LIST, GET_ROOM_DETAIL, ADD_ROOM, UPDATE_ROOM, DELETE_ROOM } from "../room/RoomTypes";
-
+import { GET_ROOM_LIST, GET_ROOM_DETAIL, ADD_ROOM, UPDATE_ROOM, DELETE_ROOM } from "../room/type/page.jsx";
     const initialState = {
     roomList: [],
     roomDetail: {},
