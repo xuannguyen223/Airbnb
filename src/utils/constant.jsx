@@ -19,3 +19,25 @@ export const RENTED_ROOMS_BY_USER_ID_API =
   "/api/dat-phong/lay-theo-nguoi-dung/";
 export const ROOMS_API = "/api/phong-thue/";
 // -----
+// Anh Duc
+export const idToTinhThanhMap = {
+  1: "quan-1-hcm",
+  2: "cai-rang",
+  3: "hon-rua",
+  4: "hoan-kiem",
+  5: "hon-tam",
+  6: "hai-chau",
+  7: "langbiang",
+  8: "mui-ne",
+  3440: "huyen-tan-yen",
+  3443: "thanh-pho-bac-kan",
+  3445: "bui-vien",
+  3446: "ganh-da-dia",
+  3448: "quan-1",
+  3581: "quan-13",
+  3582: "cu-chi",
+  3583: "quan-4",
+  3585: "quan-2",
+  4298: "quang-ngai",
+  4301: "chai-na",
+};

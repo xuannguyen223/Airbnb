@@ -206,12 +206,12 @@
   @apply text-2xl font-semibold;
 }
 
-.user-profile .info-right .time-join {
-  @apply my-4 text-gray-500 text-sm;
+.user-profile .info-right .basic-user-info {
+  @apply text-gray-500 my-4;
 }
 
 .user-profile .info-right .edit-profile {
-  @apply underline text-gray-700 hover:text-customPink;
+  @apply underline text-customPink hover:bg-yellow-100 p-2 rounded-md;
 }
 
 .user-profile .info-right .rented-rooms-information {
@@ -236,7 +236,7 @@
 }
 
 .info-left .user-avatar .update-avatar {
-  @apply underline font-bold text-sm mt-2 hover:text-customPink;
+  @apply underline font-bold text-sm mt-2 text-customPink hover:bg-yellow-100 p-2 rounded-md;
 }
 
 .user-profile .info-left .verify-id .badge {
@@ -330,16 +330,16 @@
 }
 
 .rented-rooms-information .room .img {
-  @apply w-full md:w-1/2 relative transition-all;
+  @apply w-full md:w-[320px] relative transition-all;
 }
 
 .rented-rooms-information .room .image {
-  @apply rounded-xl object-cover h-56 w-full;
+  @apply rounded-xl object-cover h-56 w-full min-w-80;
 }
 
 .rented-rooms-information .room .info {
   @apply relative mt-8 md:mt-0 text-gray-500 text-sm 2xl:text-[16px]
-  w-full md:w-1/2 lg:w-2/3 2xl:w-full;
+  w-full md:w-1/2 lg:w-2/3;
 }
 
 .rented-rooms-information .room .info .room-name {
@@ -352,7 +352,7 @@
 
 .rented-rooms-information .room .info .basic-info,
 .rented-rooms-information .room .info .plus-info {
-  @apply overflow-hidden text-ellipsis whitespace-nowrap;
+  @apply overflow-hidden text-ellipsis whitespace-nowrap mt-1;
 }
 
 .rented-rooms-information .room .info .price {

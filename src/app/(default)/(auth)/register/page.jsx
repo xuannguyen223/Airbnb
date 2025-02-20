@@ -290,7 +290,6 @@ const Register = () => {
           onClose={() => {
             if (isRegisterSuccess) {
               formik.resetForm();
-              console.log("formik.values", formik.values);
             }
 
             dispatch(handleOpenModalAlert(false));

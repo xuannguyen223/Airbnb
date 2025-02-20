@@ -8,7 +8,12 @@ import {
   handleUpdateUserInfoAction,
   handleUploadUserAvatarAction,
 } from "@/lib/features/user/userAction";
-import { BADGE_AWARDED, ROOMS_API, USER_ID } from "@/utils/constant";
+import {
+  BADGE_AWARDED,
+  idToTinhThanhMap,
+  ROOMS_API,
+  USER_ID,
+} from "@/utils/constant";
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { FaUserCircle } from "react-icons/fa";
@@ -35,7 +40,7 @@ import { HiOutlineExclamationCircle } from "react-icons/hi";
 import { FileInput, Label } from "flowbite-react";
 import { validationPayLoad } from "@/lib/features/auth/loginAction";
 import { useRouter } from "next/navigation";
-import { commonHttp } from "@/services/interceptor/commonInterceptor";
+import { FACILITY_NAME } from "@/utils/facilityDictionary";
 
 const UserProfile = () => {
   const [pageLoading, setPageLoading] = useState(true);
@@ -66,12 +71,10 @@ const UserProfile = () => {
   const arrayRentedRoom = useSelector(
     (state) => state.userSlice.arrayRentedRoom
   );
-  console.log("arrayRentedRoom: ", arrayRentedRoom);
 
   const arrayRoomDetail = useSelector(
     (state) => state.userSlice.arrayRoomDetail
   );
-  console.log("arrayRoomDetail: ", arrayRoomDetail);
 
   const dispatch = useDispatch();
   const router = useRouter();
@@ -113,10 +116,8 @@ const UserProfile = () => {
     },
     validationSchema: validationSchema,
     onSubmit: (values) => {
-      console.log("values: ", values);
       dispatch(handleLoadingUpdateProfile(true));
       dispatch(handleUpdateUserInfoAction(values, userInfo.id));
-      // dispatch(handleRegisterAction(values));
     },
   });
 
@@ -131,51 +132,59 @@ const UserProfile = () => {
     }
   };
 
-  const getRoomDetails = async (roomID) => {
-    const responseRoomDetails = await commonHttp.get(`${ROOMS_API}/${roomID}`);
-    if (responseRoomDetails.status === 200) {
-      return responseRoomDetails.data.content;
-    }
+  // render plus info room
+  const renderPlusInfo = (facilities) => {
+    const resultArray = [];
+    Object.keys(facilities).forEach((key) => {
+      if (facilities[key] === true) {
+        let finalKey = key;
+        if (key in FACILITY_NAME) finalKey = FACILITY_NAME[key];
+        resultArray.push(finalKey);
+      }
+    });
+    return resultArray.join(" . ");
+  };
+
+  const navigateToRoomDetails = (locationID, roomID) => {
+    let finalLocationID = locationID;
+    if (locationID in idToTinhThanhMap)
+      finalLocationID = idToTinhThanhMap[locationID];
+    router.push(`list-city/${finalLocationID}/${roomID}`);
   };
 
   // render Rented Room
   const handleRenderRentedRoom = () => {
-    return arrayRentedRoom.map((room) => {
-      getRoomDetails(room.maPhong).then((room) => {
-        console.log("roomDetails: ", room);
-        return (
-          <div
-            key={room.id}
-            className="room"
-            onClick={() => {
-              // router.push("/login");
-              getRoomDetails(3);
-            }}
-          >
-            <div className="img">
-              <img src="/img/bg-login-register.avif" alt="" className="image" />
+    return arrayRoomDetail.map((room) => {
+      return (
+        <div
+          key={room.bookingID}
+          className="room"
+          onClick={() => {
+            navigateToRoomDetails(room.maViTri, room.id);
+          }}
+        >
+          <div className="img">
+            <img
+              src={room.hinhAnh || "/img/bg-login-register.avif"}
+              alt=""
+              className="image"
+            />
+          </div>
+          <div className="info">
+            <p className="booking-id">Mã Đặt Phòng: {room.bookingID}</p>
+            <h2 className="room-name">{room.tenPhong}</h2>
+            <hr />
+            <div className="basic-info">
+              {room.khach} khách . {room.phongNgu} phòng ngủ . {room.giuong}{" "}
+              giường . {room.phongTam} phòng tắm
             </div>
-            <div className="info">
-              {/* <p className="location">Căn hộ dịch vụ tại "Tên Thành Phố"</p> */}
-              <p className="location">Mã Đặt Phòng: {room.id}</p>
-              <h2 className="room-name">
-                Phòng sang trọng với ban công tại D.1
-              </h2>
-              <hr />
-              <div className="basic-info">
-                3 khách . Phòng Studio . 1 phòng ngủ . 1 giường . 1 phòng tắm
-              </div>
-              <div className="plus-info">
-                Wifi . Máy giặt . Tivi . Đỗ xe . Hồ Bơi
-              </div>
-
-              <div className="price">
-                $28 / <span className="font-normal ml-1"> đêm</span>
-              </div>
+            <div className="plus-info">{renderPlusInfo(room)}</div>
+            <div className="price">
+              ${room.giaTien} / <span className="font-normal ml-1"> đêm</span>
             </div>
           </div>
-        );
-      });
+        </div>
+      );
     });
   };
 
@@ -210,7 +219,6 @@ const UserProfile = () => {
               Cập nhật ảnh
             </button>
           </div>
-
           <div className="verify-id">
             <div className="badge">
               {isBadgeAwarded && (
@@ -246,9 +254,13 @@ const UserProfile = () => {
           <h2 className="title">
             Xin chào <span className="capitalize">{userInfo.name}</span> !
           </h2>
-          <p className="time-join">
-            Bắt đầu tham gia vào {userInfo.id > 4500 ? "2025" : "2024"}
+          <p className="basic-user-info">
+            Email: {userInfo.email} . Ngày sinh: {userInfo.birthday || "....."}{" "}
+            . Giới tính: {userInfo.gender ? "Nam" : "Nữ"} . Số điện thoại:{" "}
+            {userInfo.phone || "....."} . Bắt đầu tham gia vào{" "}
+            {userInfo.id > 4500 ? "2025" : "2024"} .
           </p>
+          <p></p>
           {/* btn Edit Profile */}
           <button
             className="edit-profile"
@@ -268,7 +280,12 @@ const UserProfile = () => {
             <h1 className="title">Phòng đã thuê</h1>
             <div className="room-group">
               {isRentedRoom ? (
-                handleRenderRentedRoom()
+                handleRenderRentedRoom() || (
+                  <p>
+                    {" "}
+                    Đã có lỗi xảy ra trong quá trình lấy thông tin phòng thuê{" "}
+                  </p>
+                )
               ) : (
                 <p>Bạn chưa đặt phòng nào.</p>
               )}
