@@ -3,22 +3,15 @@ import Loading from "@/app/loading";
 import NotFound from "@/app/not-found";
 import {
   getRentedRoomsByUserIDAction,
-  getRoomDetailAction,
   getUserInfoAction,
   handleUpdateUserInfoAction,
   handleUploadUserAvatarAction,
 } from "@/lib/features/user/userAction";
-import {
-  BADGE_AWARDED,
-  idToTinhThanhMap,
-  ROOMS_API,
-  USER_ID,
-} from "@/utils/constant";
+import { BADGE_AWARDED, idToTinhThanhMap, USER_ID } from "@/utils/constant";
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { FaUserCircle } from "react-icons/fa";
 import {
-  handleArrayRoomDetail,
   handleBadgeAwarded,
   handleLoadingUpdateAvatar,
   handleLoadingUpdateProfile,
@@ -37,7 +30,7 @@ import dayjs from "dayjs";
 import { DatePicker, Select, Button } from "antd";
 import { FaRegCheckCircle } from "react-icons/fa";
 import { HiOutlineExclamationCircle } from "react-icons/hi";
-import { FileInput, Label } from "flowbite-react";
+import { FileInput } from "flowbite-react";
 import { validationPayLoad } from "@/lib/features/auth/loginAction";
 import { useRouter } from "next/navigation";
 import { FACILITY_NAME } from "@/utils/facilityDictionary";
@@ -47,6 +40,7 @@ const UserProfile = () => {
   const [avatar, setAvatar] = useState(null);
   const isUserLogin = useSelector((state) => state.userSlice.isUserLogin);
   const userInfo = useSelector((state) => state.userSlice.userInfo);
+  console.log("userInfo: ", userInfo);
   const isBadgeAwarded = useSelector((state) => state.userSlice.isBadgeAwarded);
   const openModalUserInfo = useSelector(
     (state) => state.userSlice.openModalUserInfo
@@ -68,9 +62,6 @@ const UserProfile = () => {
     (state) => state.userSlice.validationAvatar
   );
   const isRentedRoom = useSelector((state) => state.userSlice.isRentedRoom);
-  const arrayRentedRoom = useSelector(
-    (state) => state.userSlice.arrayRentedRoom
-  );
 
   const arrayRoomDetail = useSelector(
     (state) => state.userSlice.arrayRoomDetail

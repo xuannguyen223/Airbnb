@@ -14,6 +14,7 @@ export default {
       colors: {
         customPink: "#FE6B6E",
         customGray: "#C6C6C6",
+        customDark: "#01152B",
       },
       boxShadow: {
         "custom-blue": "0 0 0 2px rgba(5,145,255,0.1)",
