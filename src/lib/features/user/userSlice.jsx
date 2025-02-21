@@ -81,5 +81,4 @@ export const {
   handleArrayRoomDetail,
 } = userSlice.actions;
 
-// export default userSlice;
 export default userSlice.reducer;

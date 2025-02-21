@@ -6,6 +6,7 @@ export const GROUP_ID = "GP00";
 export const REGISTER_API = "/api/auth/signup";
 export const LOGIN_API = "/api/auth/signin";
 export const ROLE_USER = "USER";
+export const ROLE_ADMIN = "ADMIN";
 export const ACCESS_TOKEN = btoa("accessToken");
 export const EMAIL = btoa("email");
 export const PASSWORD = btoa("password");
@@ -18,6 +19,8 @@ export const UPLOAD_AVATAR_API = "/api/users/upload-avatar";
 export const RENTED_ROOMS_BY_USER_ID_API =
   "/api/dat-phong/lay-theo-nguoi-dung/";
 export const ROOMS_API = "/api/phong-thue/";
+export const USER_PAGINATION_API = "api/users/phan-trang-tim-kiem";
+export const MAX_INT32 = Math.pow(2, 31) - 1;
 // -----
 // Anh Duc
 export const idToTinhThanhMap = {

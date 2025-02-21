@@ -5,6 +5,7 @@ import {
   LOGIN_API,
   PASSWORD,
   REMEMBER_ACCOUNT,
+  ROLE_USER,
   SRK,
   USER_ID,
 } from "@/utils/constant";
@@ -16,6 +17,7 @@ import {
   handleValidationErr,
 } from "./loginSlice";
 import CryptoJS from "crypto-js";
+import { handleVerifyAdmin } from "../admin/adminSlice";
 
 export const validationPayLoad = (isValidationErr, message) => {
   return {

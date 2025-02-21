@@ -3,7 +3,6 @@ import { Modal } from "flowbite-react";
 import { useEffect, useState } from "react";
 import { FaRegCheckCircle } from "react-icons/fa";
 import { useDispatch, useSelector } from "react-redux";
-// import { verifyAdminAction } from "../../Redux/Actions/adminAction";
 import { ACCESS_TOKEN, USER_ID } from "@/utils/constant";
 import NotFound from "../not-found";
 import Link from "next/link";
@@ -16,13 +15,15 @@ import { MdOutlineLocationCity } from "react-icons/md";
 import Loading from "../loading";
 import { handleUserLogin } from "@/lib/features/user/userSlice";
 import { getUserInfoAction } from "@/lib/features/user/userAction";
+import { handleVerifyAdmin } from "@/lib/features/admin/adminSlice";
 
 export default function AdminLayout({ children }) {
   const [pageLoading, setPageLoading] = useState(true);
   const [openAlertLogout, setOpenAlertLogout] = useState(false);
   const isUserLogin = useSelector((state) => state.userSlice.isUserLogin);
   const userInfo = useSelector((state) => state.userSlice.userInfo);
-  console.log("userInfo: ", userInfo);
+  const isAdmin = useSelector((state) => state.adminSlice.isAdmin);
+
   const router = useRouter();
   const pathName = usePathname();
   const dispatch = useDispatch();
@@ -30,6 +31,7 @@ export default function AdminLayout({ children }) {
   const handleLogout = () => {
     localStorage.removeItem(ACCESS_TOKEN);
     localStorage.removeItem(USER_ID);
+    dispatch(handleVerifyAdmin(false));
   };
 
   useEffect(() => {
@@ -48,7 +50,7 @@ export default function AdminLayout({ children }) {
     return <Loading />;
   }
 
-  if (!isUserLogin || userInfo.role !== "USER") {
+  if (!isUserLogin || !isAdmin) {
     return <NotFound />;
   }
 
@@ -67,7 +69,11 @@ export default function AdminLayout({ children }) {
             <Link
               href={"/admin"}
               className={
-                pathName === "/admin" ? "link-active" : "link-noActive"
+                pathName === "/admin" ||
+                pathName === "/admin/create-user" ||
+                pathName.includes("/admin/edit-user")
+                  ? "link-active"
+                  : "link-noActive"
               }
             >
               <FaUsersCog className="inline text-2xl" />

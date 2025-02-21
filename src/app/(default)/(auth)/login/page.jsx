@@ -111,7 +111,7 @@ const Login = () => {
                 <div className="form-group">
                   <label htmlFor="email">Email</label>
                   <Field
-                    type="email"
+                    type="text"
                     name="email"
                     placeholder="Email *"
                     className={`form-input ${

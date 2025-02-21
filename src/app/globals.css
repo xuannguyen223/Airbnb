@@ -517,3 +517,68 @@
 .alert-logout-info .btn {
   @apply flex justify-center gap-4;
 }
+
+/* ----------------------------- ADMIN USER ---------------------------------- */
+/* Phần chung */
+.admin-user {
+  @apply p-4;
+}
+
+.admin-user .title {
+  @apply capitalize font-semibold text-2xl;
+}
+
+.admin-user .btn-add-user {
+  @apply my-4 capitalize rounded-sm;
+}
+
+.admin-user .search-user {
+  @apply my-3 text-lg;
+}
+
+.admin-user .table-users {
+  @apply overflow-x-auto mt-8;
+}
+
+.table-users .btn-edit-user {
+  @apply font-medium text-blue-500 hover:underline dark:text-cyan-500;
+}
+
+.table-users .btn-delete-user {
+  @apply font-medium text-red-500 hover:underline dark:text-cyan-500 ml-2;
+}
+
+/* EditUser */
+
+.admin-edit-user {
+  @apply p-10;
+}
+
+.admin-edit-user .title {
+  @apply text-2xl font-semibold text-gray-800 mb-10;
+}
+
+.form-edit {
+  @apply space-y-10;
+}
+
+.form-edit .input {
+  @apply grid lg:grid-cols-2 gap-y-8 gap-x-6;
+}
+
+.form-edit .input .errMess {
+  @apply text-red-500 text-sm pl-2;
+}
+
+.form-edit .input .custom_icon {
+  @apply text-xl text-gray-400;
+}
+
+.form-edit .btn-submit {
+  @apply mt-2 shadow-md bg-indigo-500 text-white py-2 px-6 rounded-md hover:bg-indigo-700 focus:outline-none w-full
+  flex items-center justify-center space-x-2;
+}
+
+.form-edit .btn-submit .spinner {
+  @apply w-5 h-5 border-4 border-t-4 border-gray-200 border-t-yellow-400 rounded-full my-1 animate-spin;
+}

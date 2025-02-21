@@ -40,7 +40,6 @@ const UserProfile = () => {
   const [avatar, setAvatar] = useState(null);
   const isUserLogin = useSelector((state) => state.userSlice.isUserLogin);
   const userInfo = useSelector((state) => state.userSlice.userInfo);
-  console.log("userInfo: ", userInfo);
   const isBadgeAwarded = useSelector((state) => state.userSlice.isBadgeAwarded);
   const openModalUserInfo = useSelector(
     (state) => state.userSlice.openModalUserInfo
@@ -189,6 +188,7 @@ const UserProfile = () => {
 
   return (
     <>
+      {/* BLOCK MAIN */}
       <div className="user-profile-banner">
         <h1 className="relative">THÔNG TIN NGƯỜI DÙNG {userInfo.name}</h1>
       </div>
@@ -488,7 +488,6 @@ const UserProfile = () => {
                 className={`btn-submit ${
                   isLoadingUpdateAvatar || !avatar ? "" : "hover:bg-indigo-600"
                 }`}
-                // disabled={isLoadingUpdateAvatar}
                 disabled={isLoadingUpdateAvatar || !avatar}
                 onClick={() => {
                   if (avatar) {

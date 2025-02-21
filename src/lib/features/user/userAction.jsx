@@ -2,6 +2,8 @@ import { commonHttp } from "@/services/interceptor/commonInterceptor";
 import {
   ACCESS_TOKEN,
   RENTED_ROOMS_BY_USER_ID_API,
+  ROLE_ADMIN,
+  ROLE_USER,
   ROOMS_API,
   UPLOAD_AVATAR_API,
   USER_API,
@@ -21,6 +23,7 @@ import {
 } from "./userSlice";
 import { redirect } from "next/navigation";
 import { validationPayLoad } from "../auth/loginAction";
+import { handleVerifyAdmin } from "../admin/adminSlice";
 
 export const getUserInfoAction = (id) => {
   return async (dispatch, getState) => {
@@ -28,6 +31,9 @@ export const getUserInfoAction = (id) => {
 
     if (response.status === 200) {
       dispatch(handleUserInfo(response.data.content));
+      if (response.data.content.role === ROLE_ADMIN) {
+        dispatch(handleVerifyAdmin(true));
+      }
     } else {
       alert(
         "Đã có lỗi xảy ra trong quá trình thực hiện. Vui lòng đăng nhập và thử lại !"
