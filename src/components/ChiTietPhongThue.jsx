@@ -7,12 +7,14 @@ import { http } from "@/services/interceptor/homeInterceptor";
 import { useSelector, useDispatch } from "react-redux";
 import Image from "next/image";
 import { idToTinhThanhMap, tinhThanhToIdMap } from "@/utils/constant";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 const ChiTietPhongThue = ({ idPhongThue, phongThue }) => {
   const viTriTong = useSelector((state) => state.viTriTongReducer.viTriTong);
   const tinhThanhTheoMaViTri = idToTinhThanhMap[phongThue.maViTri];
   const idTinhThanh = tinhThanhToIdMap[tinhThanhTheoMaViTri];
   const [luongKhach, setLuongKhach] = useState(2);
-  //   console.log(phongThue);
+
   const startButtonRef = useRef(null);
   const endButtonRef = useRef(null);
 
@@ -26,7 +28,6 @@ const ChiTietPhongThue = ({ idPhongThue, phongThue }) => {
 
   const endDateconvert = new Date(endDate);
   const EndIsoDate = endDateconvert.toISOString();
-  //   console.log(StartIsoDate, EndIsoDate); // Đây là ngày giờ bắt đầu và kết thúc đã chọn
 
   const bodyDatPhong = {
     id: phongThue.id,
@@ -65,13 +66,13 @@ const ChiTietPhongThue = ({ idPhongThue, phongThue }) => {
     if (startDate !== null && endDate !== null) {
       const res = await http.post("/api/dat-phong", bodyDatPhong);
       if (res.data.message === "Thêm mới thành công!") {
-        alert("Bạn đã đặt phòng thành công");
+        toast.success("Đặt phòng thành công!");
         setStartDate(null);
         setEndDate(null);
         setLuongKhach(2);
       }
     } else {
-      alert("Bạn vẫn chưa chọn ngày bắt đầu và kết thúc");
+      toast.error("Bạn vẫn chưa chọn ngày bắt đầu và kết thúc");
     }
   };
   return (
@@ -408,6 +409,7 @@ const ChiTietPhongThue = ({ idPhongThue, phongThue }) => {
               >
                 Đặt phòng
               </button>
+              <ToastContainer />
             </div>
             <div className="opacity-40 text-center w-full my-5">
               Bạn vẫn chưa bị trừ tiền
