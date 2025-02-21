@@ -42,7 +42,6 @@ const AdminUsers = () => {
     const newTotal = extra.currentDataSource.length;
     if (newTotal > 0) {
       pagination.total = newTotal;
-      pagination.showTotal = () => handleShowTotal(newTotal);
     }
     dispatch(handleUserPagination(pagination));
   };
@@ -190,7 +189,12 @@ const AdminUsers = () => {
           onChange={handleChange}
           scroll={{ x: "max-content" }}
           bordered
-          pagination={pagination}
+          pagination={{
+            ...pagination,
+            showTotal: () => {
+              return `Tổng cộng ${pagination.total} người dùng`;
+            },
+          }}
         />
       </div>
     </div>

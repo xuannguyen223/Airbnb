@@ -4,7 +4,6 @@ import {
   handleArrUser,
   handleDeleteUser,
   handleLoading,
-  handleShowTotal,
   handleUserPagination,
 } from "./adminUserSlice";
 import { redirect } from "next/navigation";
@@ -22,7 +21,6 @@ export const getArrayUsers = (keyword) => {
       dispatch(handleArrUser(responseUserList.data.content.data));
       const pagination = {
         total: responseUserList.data.content.data.length,
-        showTotal: (total) => handleShowTotal(total),
       };
       dispatch(handleUserPagination(pagination));
     } else {

@@ -9,12 +9,7 @@ const initialState = {
     defaultPageSize: 10,
     showSizeChanger: true,
     pageSizeOptions: ["10", "20", "50"],
-    showTotal: (total) => handleShowTotal(total),
   },
-};
-
-export const handleShowTotal = (total) => {
-  return `Tổng cộng ${total} người dùng`;
 };
 
 const adminUserSlice = createSlice({
@@ -28,6 +23,7 @@ const adminUserSlice = createSlice({
       state.arrayUsers = state.arrayUsers.filter(
         (user) => user.id !== action.payload
       );
+      state.userPagination.total--;
     },
     handleSelectedUserInfo(state, action) {
       state.selectedUserInfo = action.payload;
