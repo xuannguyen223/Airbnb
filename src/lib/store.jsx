@@ -4,6 +4,7 @@ import loginSlice from "./features/auth/loginSlice";
 import userSlice from "./features/user/userSlice";
 import adminSlice from "./features/admin/adminSlice";
 import adminUserSlice from "./features/admin/user/adminUserSlice";
+import viTriTongReducer from "./features/viTri/viTriTongReducer";
 
 export const store = () => {
   return configureStore({
@@ -13,6 +14,7 @@ export const store = () => {
       userSlice: userSlice,
       adminSlice: adminSlice,
       adminUserSlice: adminUserSlice,
+      viTriTongReducer,
     },
   });
 };
