@@ -60,7 +60,7 @@ const userSlice = createSlice({
       state.arrayRentedRoom = actions.payload;
     },
     handleArrayRoomDetail(state, actions) {
-      state.arrayRoomDetail = [...state.arrayRoomDetail, actions.payload];
+      state.arrayRoomDetail = actions.payload;
     },
   },
 });

@@ -34,6 +34,7 @@ import { FileInput } from "flowbite-react";
 import { validationPayLoad } from "@/lib/features/auth/loginAction";
 import { useRouter } from "next/navigation";
 import { FACILITY_NAME } from "@/utils/facilityDictionary";
+import Login from "../(auth)/login/page";
 
 const UserProfile = () => {
   const [pageLoading, setPageLoading] = useState(true);
@@ -183,7 +184,7 @@ const UserProfile = () => {
   }
 
   if (!isUserLogin) {
-    return <NotFound />;
+    router.push("/login");
   }
 
   return (
@@ -246,12 +247,11 @@ const UserProfile = () => {
             Xin chào <span className="capitalize">{userInfo.name}</span> !
           </h2>
           <p className="basic-user-info">
-            Email: {userInfo.email} . Ngày sinh: {userInfo.birthday || "....."}{" "}
-            . Giới tính: {userInfo.gender ? "Nam" : "Nữ"} . Số điện thoại:{" "}
-            {userInfo.phone || "....."} . Bắt đầu tham gia vào{" "}
+            Email: {userInfo.email} . Giới tính:{" "}
+            {userInfo.gender ? "Nam" : "Nữ"} . Số điện thoại:{" "}
+            {userInfo.phone || "....."} . <br /> Bắt đầu tham gia vào{" "}
             {userInfo.id > 4500 ? "2025" : "2024"} .
           </p>
-          <p></p>
           {/* btn Edit Profile */}
           <button
             className="edit-profile"

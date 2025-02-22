@@ -32,6 +32,7 @@ export default function AdminLayout({ children }) {
     localStorage.removeItem(ACCESS_TOKEN);
     localStorage.removeItem(USER_ID);
     dispatch(handleVerifyAdmin(false));
+    dispatch(handleUserLogin(false));
   };
 
   useEffect(() => {

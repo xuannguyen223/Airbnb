@@ -6,7 +6,7 @@ import React, { useEffect, useState, useRef } from "react";
 import { http } from "@/services/interceptor/homeInterceptor";
 import { useSelector, useDispatch } from "react-redux";
 import Image from "next/image";
-import { idToTinhThanhMap, tinhThanhToIdMap } from "@/utils/constant";
+import { idToTinhThanhMap, tinhThanhToIdMap, USER_ID } from "@/utils/constant";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 const ChiTietPhongThue = ({ idPhongThue, phongThue }) => {
@@ -30,11 +30,11 @@ const ChiTietPhongThue = ({ idPhongThue, phongThue }) => {
   const EndIsoDate = endDateconvert.toISOString();
 
   const bodyDatPhong = {
-    id: phongThue.id,
+    maPhong: phongThue.id,
     ngayDen: StartIsoDate,
     ngayDi: EndIsoDate,
     soLuongKhach: luongKhach ? luongKhach : 2,
-    maNguoiDung: (Math.random() * 1000).toFixed(),
+    maNguoiDung: localStorage.getItem(USER_ID) || 0,
   };
 
   const handleStartButtonClick = () => {
@@ -63,16 +63,20 @@ const ChiTietPhongThue = ({ idPhongThue, phongThue }) => {
 
   const daysBetween = calculateDaysBetween(startDate, endDate);
   const handleDatPhong = async () => {
-    if (startDate !== null && endDate !== null) {
-      const res = await http.post("/api/dat-phong", bodyDatPhong);
-      if (res.data.message === "Thêm mới thành công!") {
-        toast.success("Đặt phòng thành công!");
-        setStartDate(null);
-        setEndDate(null);
-        setLuongKhach(2);
-      }
-    } else {
+    if (bodyDatPhong.soLuongKhach > phongThue.khach) {
+      toast.error(`Số lượng khách tối đa bạn có thể đặt là ${phongThue.khach}`);
+      return;
+    }
+    if (startDate === null || endDate === null) {
       toast.error("Bạn vẫn chưa chọn ngày bắt đầu và kết thúc");
+      return;
+    }
+    const res = await http.post("/api/dat-phong", bodyDatPhong);
+    if (res.data.message === "Thêm mới thành công!") {
+      toast.success("Đặt phòng thành công!");
+      setStartDate(null);
+      setEndDate(null);
+      setLuongKhach(2);
     }
   };
   return (

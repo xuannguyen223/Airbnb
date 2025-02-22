@@ -17,7 +17,8 @@ import {
   handleValidationErr,
 } from "./loginSlice";
 import CryptoJS from "crypto-js";
-import { handleVerifyAdmin } from "../admin/adminSlice";
+import { handleUserInfo, handleUserLogin } from "../user/userSlice";
+import { getUserInfoAction } from "../user/userAction";
 
 export const validationPayLoad = (isValidationErr, message) => {
   return {
@@ -44,6 +45,8 @@ export const handleLoginAction = (values, rememberAccount) => {
     if (response.status === 200) {
       dispatch(handleOpenModalAlert(true));
       dispatch(handleLoginSuccess(true));
+      dispatch(handleUserLogin(true));
+      dispatch(getUserInfoAction(response.data.content.user.id));
       setTimeout(() => {
         dispatch(handleOpenModalAlert(false));
         dispatch(handleNavigateToHome(true));

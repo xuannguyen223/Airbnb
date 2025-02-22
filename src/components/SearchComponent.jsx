@@ -25,12 +25,10 @@ const SearchComponent = () => {
           tokenCybersoft: tokenCyberSoft,
         },
       });
-      console.log(res.data.content);
+
       const action = layViTriTongAction(res.data.content);
       dispatch(action);
-    } catch (error) {
-      console.log(error);
-    }
+    } catch (error) {}
   };
   const handleOnFocus = async () => {
     try {
@@ -42,9 +40,7 @@ const SearchComponent = () => {
         },
       });
       setIsOpen(true);
-    } catch (error) {
-      console.log(error);
-    }
+    } catch (error) {}
   };
   const handleInputChange = (e) => {
     const value = e.target.value;

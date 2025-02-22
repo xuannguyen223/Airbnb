@@ -1,6 +1,6 @@
 /* styles/globals.css */
 
-@import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css');
+@import url("https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css");
 
 @tailwind base;
 @tailwind components;
@@ -50,7 +50,7 @@
 .register,
 .login {
   background: url(/img/bg-login-register.avif);
-  @apply relative min-h-screen bg-cover bg-center bg-no-repeat flex items-center justify-center py-20;
+  @apply relative min-h-screen bg-cover bg-center bg-no-repeat flex items-center justify-center pb-20 pt-56;
 }
 
 .register::before,
@@ -180,8 +180,8 @@
 
 .user-profile-banner {
   background: url(/img/bg-user-profile.jpeg);
-  @apply bg-no-repeat bg-cover bg-bottom h-[50vh] lg:h-[40vh]
-    flex justify-center items-center relative pt-20 md:pt-10 lg:pt-0
+  @apply bg-no-repeat bg-cover bg-bottom h-[50vh] lg:h-[40vh] mt-32
+    flex justify-center items-center text-center relative pt-10 lg:pt-0
     uppercase text-gray-100 tracking-wider text-lg md:text-xl lg:text-3xl;
 }
 
@@ -196,7 +196,7 @@
 }
 
 .user-profile .info-left {
-  @apply min-w-96 max-h-[600px] p-5 border border-gray-200
+  @apply sm:min-w-80 xl:min-w-96 max-h-[600px] p-5 border border-gray-200
   rounded-md flex flex-col;
 }
 
@@ -237,6 +237,10 @@
 
 .info-left .user-avatar .avatar-upload {
   @apply w-36 h-36 object-cover mx-auto rounded-full my-3;
+}
+
+.avatar-user-upload {
+  @apply w-8 h-8 object-cover mx-auto rounded-full;
 }
 
 .info-left .user-avatar .update-avatar {
@@ -334,16 +338,16 @@
 }
 
 .rented-rooms-information .room .img {
-  @apply w-full md:w-[320px] relative transition-all;
+  @apply w-full md:w-1/2 xl:w-fit relative transition-all;
 }
 
 .rented-rooms-information .room .image {
-  @apply rounded-xl object-cover h-56 w-full min-w-80;
+  @apply rounded-xl object-cover h-56 w-full;
 }
 
 .rented-rooms-information .room .info {
   @apply relative mt-8 md:mt-0 text-gray-500 text-sm 2xl:text-[16px]
-  w-full md:w-1/2 lg:w-2/3;
+  w-full md:w-1/2 xl:w-3/5;
 }
 
 .rented-rooms-information .room .info .room-name {

@@ -28,7 +28,6 @@ import { handleVerifyAdmin } from "../admin/adminSlice";
 export const getUserInfoAction = (id) => {
   return async (dispatch, getState) => {
     const response = await commonHttp.get(`${USER_API}/${id}`);
-
     if (response.status === 200) {
       dispatch(handleUserInfo(response.data.content));
       if (response.data.content.role === ROLE_ADMIN) {
@@ -123,17 +122,18 @@ export const getRentedRoomsByUserIDAction = (id) => {
     if (responseRentedRooms.status === 200 && dataRentedRoom.length !== 0) {
       dispatch(handleIsRentedRoom(true));
       dispatch(handleArrayRentedRoom(dataRentedRoom));
+      let listRoomDetails = [];
       dataRentedRoom.forEach(async (room) => {
         const responseRoomDetails = await commonHttp.get(
           `${ROOMS_API}/${room.maPhong}`
         );
         if (responseRoomDetails.status === 200) {
-          dispatch(
-            handleArrayRoomDetail({
-              ...responseRoomDetails.data.content,
-              bookingID: room.id,
-            })
-          );
+          const roomDetailsWithId = {
+            ...responseRoomDetails.data.content,
+            bookingID: room.id,
+          };
+          listRoomDetails = [...listRoomDetails, roomDetailsWithId];
+          dispatch(handleArrayRoomDetail(listRoomDetails));
         }
       });
     } else {
