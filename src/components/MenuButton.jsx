@@ -45,7 +45,7 @@ const MenuButton = () => {
         </div>
       </button>
       {isOpen && (
-        <div className="absolute top-[85px] bg-[#F7F7F7]  shadow-custom w-[200px] rounded-lg">
+        <div className="absolute top-[85px] bg-[#F7F7F7] shadow-custom w-[200px] rounded-lg">
           <div className="flex flex-col">
             <Link
               href="/dangky"

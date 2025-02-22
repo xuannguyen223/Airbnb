@@ -100,7 +100,7 @@ const SearchComponent = () => {
           onFocus={handleOnFocus}
           type="text"
           placeholder="Tìm kiếm điểm đến"
-          className="group-hover:bg-[#EBEBEB]  outline-none placeholder:text-sm placeholder:text-black placeholder:text-opacity-50"
+          className="group-hover:bg-[#EBEBEB] border-none focus:ring-transparent outline-none p-0 placeholder:text-sm placeholder:text-black placeholder:text-opacity-50"
         />
       </label>
       {isOpen && (
