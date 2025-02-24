@@ -109,3 +109,5 @@ export const idToTinhThanhMap = {
   4298: "quang-ngai",
   4301: "chai-na",
 };
+// Hoang
+export const ROOM_PAGINATION_API = "/api/phong-thue/phan-trang-tim-kiem";
