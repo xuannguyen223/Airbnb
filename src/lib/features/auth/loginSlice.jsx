@@ -10,6 +10,7 @@ const initialState = {
     message: "",
   },
   navigateToHome: false,
+  openModalGoogleAlert: false,
 };
 
 const loginSlice = createSlice({
@@ -34,6 +35,9 @@ const loginSlice = createSlice({
     handleNavigateToHome(state, actions) {
       state.navigateToHome = actions.payload;
     },
+    handleOpenModalGoogleAlert(state, actions) {
+      state.openModalGoogleAlert = actions.payload;
+    },
   },
 });
 
@@ -44,6 +48,7 @@ export const {
   handleLoginSuccess,
   handleValidationErr,
   handleNavigateToHome,
+  handleOpenModalGoogleAlert,
 } = loginSlice.actions;
 
 export default loginSlice.reducer;

@@ -17,6 +17,7 @@ import { EMAIL, PASSWORD, REMEMBER_ACCOUNT } from "@/utils/constant";
 import {
   handleLoading,
   handleOpenModalAlert,
+  handleOpenModalGoogleAlert,
   handleRememberAccount,
   handleValidationErr,
 } from "@/lib/features/auth/loginSlice";
@@ -25,6 +26,7 @@ import {
   handleLoginAction,
   validationPayLoad,
 } from "@/lib/features/auth/loginAction";
+import { handleLoginGoogleAction } from "@/lib/features/auth/loginGoogleAction";
 
 const Login = () => {
   const router = useRouter();
@@ -37,6 +39,9 @@ const Login = () => {
   const submitLoading = useSelector((state) => state.loginSlice.loading);
   const openModalAlert = useSelector(
     (state) => state.loginSlice.openModalAlert
+  );
+  const openModalGoogleAlert = useSelector(
+    (state) => state.loginSlice.openModalGoogleAlert
   );
   const isLoginSuccess = useSelector(
     (state) => state.loginSlice.isLoginSuccess
@@ -89,12 +94,33 @@ const Login = () => {
     }
   }, [navigateToHome]);
 
+  // create script for login Google
+  useEffect(() => {
+    const script = document.createElement("script");
+    script.src = "https://accounts.google.com/gsi/client";
+
+    document.body.appendChild(script);
+
+    return () => {
+      document.body.removeChild(script);
+    };
+  }, []);
+
+  // create function onSignIn for login Google
+  useEffect(() => {
+    window.onSignIn = (token) => {
+      //  Token is null if the 'email' scope is not present.
+      dispatch(handleLoginGoogleAction(token.credential));
+    };
+  }, []);
+
   if (pageLoading) {
     return <Loading />;
   }
 
   return (
     <>
+      <script src="https://accounts.google.com/gsi/client" async></script>
       {/* BLOCK MAIN */}
       <div className="login">
         <div className="login-form">
@@ -198,7 +224,32 @@ const Login = () => {
             </form>
           </FormikProvider>
 
-          <div className="navigate">
+          {/* Login Google */}
+          <div className="login-google mx-auto ">
+            <div className="hr">
+              <hr className="hr-css" />
+              <p className="hr-info">hoặc</p>
+            </div>
+            <div className="google-btn">
+              <div
+                id="g_id_onload"
+                data-client_id="555684801980-ohgqmlpb1nrp16splhlf0na04njvlgdp.apps.googleusercontent.com"
+                data-callback="onSignIn"
+                data-auto_prompt="false"
+              ></div>
+              <div
+                className={`g_id_signin g-in`}
+                data-type="standards"
+                data-size="large"
+                data-theme="outline"
+                data-text="sign_in_with"
+                data-shape="square"
+                data-logo_alignment="left"
+              ></div>
+            </div>
+          </div>
+
+          <div className="navigate pt-4">
             Bạn chưa có tài khoản?
             <Link
               href="/register"
@@ -248,6 +299,40 @@ const Login = () => {
                     Đóng
                   </Button>
                 )}
+              </div>
+            </div>
+          </Modal.Body>
+        </Modal>
+      </div>
+      <div className="login-google-alert">
+        <Modal
+          show={openModalGoogleAlert}
+          size="lg"
+          className="-ml-3"
+          popup
+          onClose={() => {
+            dispatch(handleOpenModalGoogleAlert(false));
+          }}
+        >
+          <Modal.Header />
+          <Modal.Body>
+            <div className="login-alert-info ">
+              <HiOutlineExclamationCircle className="alert-icon text-red-400" />
+              <h2 className="title">
+                Email đã được tạo tài khoản với mật khẩu. Vui lòng đăng nhập
+                bằng mật khẩu !
+              </h2>
+              <div className="group-btn">
+                <Button
+                  color="danger"
+                  variant="solid"
+                  className="btn"
+                  onClick={() => {
+                    dispatch(handleOpenModalGoogleAlert(false));
+                  }}
+                >
+                  Đóng
+                </Button>
               </div>
             </div>
           </Modal.Body>

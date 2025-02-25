@@ -21,6 +21,8 @@ export const RENTED_ROOMS_BY_USER_ID_API =
 export const ROOMS_API = "/api/phong-thue/";
 export const USER_PAGINATION_API = "api/users/phan-trang-tim-kiem";
 export const MAX_INT32 = Math.pow(2, 31) - 1;
+export const MOCK_API_DOMAIN = "https://6725e6f6c39fedae05b63580.mockapi.io/";
+export const MOCK_API_USER_ACCOUNT = "userAccounts";
 // -----
 // Anh Duc
 export const tokenCyberSoft =
