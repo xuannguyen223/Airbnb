@@ -6,9 +6,9 @@ const initialState = {
   isLoading: false,
   roomPagination: {
     total: 0,
-    defaultPageSize: 10,
+    defaultPageSize: 5,
     showSizeChanger: true,
-    pageSizeOptions: ["10", "20", "50"],
+    pageSizeOptions: ["5", "10", "20"],
   },
 };
 
@@ -48,4 +48,5 @@ export const {
   handleRoomPagination,
 } = adminRoomSlice.actions;
 
+// export default adminRoomSlice;
 export default adminRoomSlice.reducer;

@@ -46,11 +46,13 @@ const CreateRoom = () => {
   });
 
   return (
-    <div className="admin-create-room">
-      <h2 className="title">Thêm Phòng Mới</h2>
+    <div className="admin-create-room p-10">
+      <h2 className="title text-2xl capitalize mb-8 font-semibold">
+        Thêm Phòng Mới
+      </h2>
       <FormikProvider value={formik}>
         <form onSubmit={formik.handleSubmit}>
-          <div className="room-info-field">
+          <div className="room-info-field grid lg:grid-cols-2 gap-y-8 gap-x-6">
             {Object.keys(formik.initialValues).map((field) => (
               <div className="form-group" key={field}>
                 <label htmlFor={field} className="block">
@@ -74,8 +76,13 @@ const CreateRoom = () => {
               </div>
             ))}
           </div>
-          <div className="room-info-submit">
-            <Button type="primary" htmlType="submit" disabled={isLoading}>
+          <div className="room-info-submit mt-10 flex justify-end">
+            <Button
+              type="primary"
+              htmlType="submit"
+              disabled={isLoading}
+              className="px-4 py-5 uppercase"
+            >
               {isLoading ? "Đang xử lý..." : "Thêm Phòng"}
             </Button>
           </div>

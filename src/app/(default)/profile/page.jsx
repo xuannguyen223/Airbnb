@@ -1,6 +1,5 @@
 "use client";
 import Loading from "@/app/loading";
-import NotFound from "@/app/not-found";
 import {
   getRentedRoomsByUserIDAction,
   getUserInfoAction,
@@ -34,7 +33,6 @@ import { FileInput } from "flowbite-react";
 import { validationPayLoad } from "@/lib/features/auth/loginAction";
 import { useRouter } from "next/navigation";
 import { FACILITY_NAME } from "@/utils/facilityDictionary";
-import Login from "../(auth)/login/page";
 
 const UserProfile = () => {
   const [pageLoading, setPageLoading] = useState(true);
