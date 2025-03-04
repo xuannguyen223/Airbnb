@@ -614,4 +614,3 @@
 .form-edit .btn-submit .spinner {
   @apply w-5 h-5 border-4 border-t-4 border-gray-200 border-t-yellow-400 rounded-full my-1 animate-spin;
 }
-/* ---------------------------------------------------------------------------------------- */

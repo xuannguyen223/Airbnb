@@ -111,3 +111,9 @@ export const idToTinhThanhMap = {
   4298: "quang-ngai",
   4301: "chai-na",
 };
+// Hoang
+export const ROOM_PAGINATION_API = "/api/phong-thue/phan-trang-tim-kiem";
+export const BOOKING_API = "/api/dat-phong";
+export const BOOKING_BY_USER_ID_API = "/api/dat-phong/lay-theo-nguoi-dung";
+export const LOCATION_PAGINATION_API = "/api/vi-tri/phan-trang-tim-kiem";
+export const LOCATION_API = "/api/vi-tri";

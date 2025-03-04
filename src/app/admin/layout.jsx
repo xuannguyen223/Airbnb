@@ -84,7 +84,11 @@ export default function AdminLayout({ children }) {
             <Link
               href={"/admin/rooms"}
               className={
-                pathName === "/admin/rooms" ? "link-active" : "link-noActive"
+                pathName === "/admin/rooms" ||
+                pathName === "/admin/rooms/create-room" ||
+                pathName.includes("/admin/rooms/edit-room")
+                  ? "link-active"
+                  : "link-noActive"
               }
             >
               <MdOutlineLocationCity className="inline text-2xl" />
@@ -94,7 +98,11 @@ export default function AdminLayout({ children }) {
             <Link
               href={"/admin/bookings"}
               className={
-                pathName === "/admin/bookings" ? "link-active" : "link-noActive"
+                pathName === "/admin/bookings" ||
+                pathName === "/admin/bookings/create-booking" ||
+                pathName.includes("/admin/bookings/edit-booking")
+                  ? "link-active"
+                  : "link-noActive"
               }
             >
               <FaBookmark className="inline lg:text-xl text-sm" />
@@ -104,7 +112,9 @@ export default function AdminLayout({ children }) {
             <Link
               href={"/admin/locations"}
               className={
-                pathName === "/admin/locations"
+                pathName === "/admin/locations" ||
+                pathName === "/admin/locations/create-location" ||
+                pathName.includes("/admin/locations/edit-location")
                   ? "link-active"
                   : "link-noActive"
               }

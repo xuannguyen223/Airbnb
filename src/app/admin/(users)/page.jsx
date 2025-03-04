@@ -53,7 +53,7 @@ const AdminUsers = () => {
       key: "id",
       dataIndex: "id",
       align: "center",
-      witdh: "10%",
+      width: "10%",
       className: "font-bold",
       sorter: (a, b) => b.id - a.id,
     },
@@ -63,7 +63,7 @@ const AdminUsers = () => {
       dataIndex: "name",
       key: "name",
       align: "center",
-      witdh: "15%",
+      width: "15%",
       fixed: "left",
     },
     // gender
@@ -72,7 +72,7 @@ const AdminUsers = () => {
       dataIndex: "gender",
       key: "gender",
       align: "center",
-      witdh: "15%",
+      width: "15%",
       render: (_, { gender }) => {
         return (
           <Tag color={gender ? "yellow" : "orange"} key={gender}>
@@ -99,14 +99,14 @@ const AdminUsers = () => {
       dataIndex: "email",
       key: "email",
       align: "center",
-      witdh: "15%",
+      width: "15%",
     },
     // role
     {
       title: "VAI TRÒ",
       dataIndex: "role",
       align: "center",
-      witdh: "15%",
+      width: "15%",
       render: (_, { role }) => {
         return (
           <Tag color={role === ROLE_ADMIN ? "green" : "geekblue"} key={role}>
@@ -133,7 +133,7 @@ const AdminUsers = () => {
       title: "THAO TÁC",
       dataIndex: "id",
       align: "center",
-      witdh: "15%",
+      width: "15%",
       fixed: "right",
       render: (value, record) => {
         return (

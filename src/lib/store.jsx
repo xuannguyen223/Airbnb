@@ -5,6 +5,9 @@ import userSlice from "./features/user/userSlice";
 import adminSlice from "./features/admin/adminSlice";
 import adminUserSlice from "./features/admin/user/adminUserSlice";
 import viTriTongReducer from "./features/viTri/viTriTongReducer";
+import adminRoomSlice from "./features/admin/room/adminRoomSlice";
+import adminBookingSlice from "./features/admin/booking/adminBookingSlice";
+import adminLocationSlice from "./features/admin/location/adminLocationSlice";
 
 export const store = () => {
   return configureStore({
@@ -15,6 +18,9 @@ export const store = () => {
       adminSlice: adminSlice,
       adminUserSlice: adminUserSlice,
       viTriTongReducer,
+      adminRoomSlice: adminRoomSlice,
+      adminBookingSlice: adminBookingSlice,
+      adminLocationSlice: adminLocationSlice,
     },
   });
 };
