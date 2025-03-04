@@ -68,11 +68,6 @@ const CreateBooking = () => {
                       name="roomID"
                       size="large"
                       placeholder="Chọn phòng"
-                      className={`form-input ${
-                        formik.touched.roomID && formik.errors.roomID
-                          ? "input-error"
-                          : "input-valid"
-                      }`}
                       value={formik.values.roomID || 1}
                       onChange={(value) => {
                         form.setFieldValue("roomID", value);
@@ -107,11 +102,7 @@ const CreateBooking = () => {
                   type="number"
                   name="userID"
                   placeholder="Nhập mã khách hàng"
-                  className={`form-input ${
-                    formik.touched.userID && formik.errors.userID
-                      ? "input-error"
-                      : "input-valid"
-                  }`}
+                  className={`form-input input-valid`}
                 />
                 <ErrorMessage
                   name="userID"
@@ -210,12 +201,7 @@ const CreateBooking = () => {
                   min="1"
                   name="numberOfGuests"
                   placeholder="Nhập số khách"
-                  className={`form-input ${
-                    formik.touched.numberOfGuests &&
-                    formik.errors.numberOfGuests
-                      ? "input-error"
-                      : "input-valid"
-                  }`}
+                  className={`form-input  input-valid`}
                 />
                 <ErrorMessage
                   name="numberOfGuests"

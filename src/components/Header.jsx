@@ -12,7 +12,7 @@ const Header = () => {
             <a className="text-orange-500" href="/">
               <div>
                 <svg width={102} height={32}>
-                  <title>Đây là logo công ty Airbnb</title>
+                  <title>BC77 Airbnb</title>
 
                   <path
                     className="fill-[#FF385C]"

@@ -15,6 +15,8 @@ export default {
         customPink: "#FE6B6E",
         customGray: "#C6C6C6",
         customDark: "#01152B",
+        customGgBlack: "#202125",
+        customGgGrey: "#5d5f61",
       },
       boxShadow: {
         "custom-blue": "0 0 0 2px rgba(5,145,255,0.1)",

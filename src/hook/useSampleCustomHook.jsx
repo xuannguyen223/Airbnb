@@ -3,7 +3,6 @@ import { useDispatch, useSelector } from "react-redux";
 
 const mockProcessData = (data) => {
   // just a demo
-  console.log(data);
   return data;
 };
 
@@ -21,4 +20,3 @@ const useSampleCustomHook = () => {
 };
 
 export default useSampleCustomHook;
-// remember to delete this after done
