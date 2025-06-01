@@ -151,7 +151,7 @@ const Footer = () => {
               </li>
               <li className="py-2">
                 <Link className="hover:underline" href={"/"}>
-                  Tin cây và an toàn
+                  Tin cậy và an toàn
                 </Link>
               </li>
             </ul>

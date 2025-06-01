@@ -93,7 +93,7 @@ const PhanTrangTimKiem = () => {
                 className="w-full"
               />
               <div className="font-bold px-10 py-4 text-center">
-                Trang trại và tiên nhiên
+                Trang trại và thiên nhiên
               </div>
             </Link>
             <Link

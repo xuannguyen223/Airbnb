@@ -11,6 +11,7 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 const ChiTietPhongThue = ({ idPhongThue, phongThue }) => {
   const viTriTong = useSelector((state) => state.viTriTongReducer.viTriTong);
+  const { isUserLogin } = useSelector((state) => state.userSlice);
   const tinhThanhTheoMaViTri = idToTinhThanhMap[phongThue.maViTri];
   const idTinhThanh = tinhThanhToIdMap[tinhThanhTheoMaViTri];
   const [luongKhach, setLuongKhach] = useState(2);
@@ -63,12 +64,16 @@ const ChiTietPhongThue = ({ idPhongThue, phongThue }) => {
 
   const daysBetween = calculateDaysBetween(startDate, endDate);
   const handleDatPhong = async () => {
-    if (bodyDatPhong.soLuongKhach > phongThue.khach) {
-      toast.error(`Số lượng khách tối đa bạn có thể đặt là ${phongThue.khach}`);
+    if (!isUserLogin) {
+      toast.error("Vui lòng đăng nhập để tiến hành đặt phòng");
       return;
     }
     if (startDate === null || endDate === null) {
       toast.error("Bạn vẫn chưa chọn ngày bắt đầu và kết thúc");
+      return;
+    }
+    if (bodyDatPhong.soLuongKhach > phongThue.khach) {
+      toast.error(`Số lượng khách tối đa bạn có thể đặt là ${phongThue.khach}`);
       return;
     }
     const res = await http.post("/api/dat-phong", bodyDatPhong);

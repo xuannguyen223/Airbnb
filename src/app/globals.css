@@ -442,17 +442,17 @@
 
 /* --------------------------------- ADMIN LAYOUT -------------------------------------- */
 .admin {
-  @apply flex justify-center 2xl:px-48 mx-auto bg-gray-300/60;
+  @apply flex justify-center mx-auto bg-gray-300/60;
 }
 
 /* dashboard */
 
 .admin .dashboard {
-  @apply w-1/5 bg-customDark relative 2xl:max-w-80;
+  @apply w-1/5 bg-customDark relative;
 }
 
 .dashboard .admin-logo {
-  @apply flex flex-wrap justify-start items-center gap-4 font-bold py-10
+  @apply flex justify-start flex-wrap items-center gap-4 font-bold py-10
   px-2 sm:px-8;
 }
 

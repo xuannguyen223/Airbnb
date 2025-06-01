@@ -41,7 +41,7 @@ const CityPage = async (props) => {
                       <div className="overflow-hidden text-ellipsis whitespace-nowrap">
                         {item.tenPhong}
                       </div>
-                      <hr class="w-[40px] border-t border-gray-300 mt-3" />
+                      <hr className="w-[40px] border-t border-gray-300 mt-3" />
                       <div className="mt-2 overflow-hidden text-ellipsis whitespace-normal line-clamp-2">
                         {item.khach} Khách • {item.phongNgu} Phòng ngủ •
                         {item.giuong} Giường • {item.phongTam} Phòng tắm •
