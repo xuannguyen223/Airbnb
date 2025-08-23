@@ -33,7 +33,10 @@ const CityPage = async (props) => {
             </div>
             {data?.map((item) => {
               return (
-                <div className="border border-black rounded-lg overflow-hidden p-4 border-opacity-20 mb-6">
+                <div
+                  key={item.id}
+                  className="border border-black rounded-lg overflow-hidden p-4 border-opacity-20 mb-6"
+                >
                   <Link href={`/list-city/${city}/${item.id}`} className="flex">
                     <SlickCarousel item={item} className="w-1/2" />
                     <div className="w-1/2 ml-2 relative z-0">

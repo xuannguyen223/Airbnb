@@ -53,14 +53,14 @@ const PhanTrangTimKiem = () => {
           <div className="grid lg:grid-cols-4 grid-cols-1 md:grid-cols-2 gap-8">
             <Link
               href={"/"}
-              className="mx-auto border border-black border-opacity-10 rounded-lg overflow-hidden hover:shadow-[0px_0px_8px_2px_rgba(0,0,0,0.2)]"
+              className="mx-auto md:w-full border border-black border-opacity-10 rounded-lg overflow-hidden hover:shadow-[0px_0px_8px_2px_rgba(0,0,0,0.2)]"
             >
               <Image
-                src="https://rawn-airbnb.vercel.app/_next/image?url=https%3A%2F%2Fres.cloudinary.com%2Frawn%2Fimage%2Fupload%2Ff_webp%2Fq_auto%3Abest%2Fv1628329222%2Fmjwqhra4wbzlvoo2pe27.jpg&w=1920&q=75"
+                src="/img/all-house.avif"
                 alt=""
                 width={230}
                 height={230}
-                className="w-full"
+                className="object-cover w-full h-2/3"
               />
               <div className="font-bold px-10 py-4 text-center">
                 Toàn bộ nhà
@@ -68,14 +68,14 @@ const PhanTrangTimKiem = () => {
             </Link>
             <Link
               href={"/"}
-              className="mx-auto border border-black border-opacity-10 rounded-lg overflow-hidden hover:shadow-[0px_0px_8px_2px_rgba(0,0,0,0.2)]"
+              className="mx-auto md:w-full border border-black border-opacity-10 rounded-lg overflow-hidden hover:shadow-[0px_0px_8px_2px_rgba(0,0,0,0.2)]"
             >
               <Image
-                src="https://rawn-airbnb.vercel.app/_next/image?url=https%3A%2F%2Fres.cloudinary.com%2Frawn%2Fimage%2Fupload%2Ff_webp%2Fq_auto%3Abest%2Fv1628329186%2Ffmoml05qcd0yk2stvl9r.jpg&w=1920&q=75"
+                src="/img/special-place.avif"
                 alt=""
                 width={230}
                 height={230}
-                className="w-full"
+                className="w-full object-cover h-2/3"
               />
               <div className="font-bold px-10 py-4 text-center">
                 Chỗ ở độc đáo
@@ -83,14 +83,14 @@ const PhanTrangTimKiem = () => {
             </Link>
             <Link
               href={"/"}
-              className="mx-auto border border-black border-opacity-10 rounded-lg overflow-hidden hover:shadow-[0px_0px_8px_2px_rgba(0,0,0,0.2)]"
+              className="mx-auto md:w-full border border-black border-opacity-10 rounded-lg overflow-hidden hover:shadow-[0px_0px_8px_2px_rgba(0,0,0,0.2)]"
             >
               <Image
-                src="https://rawn-airbnb.vercel.app/_next/image?url=https%3A%2F%2Fres.cloudinary.com%2Frawn%2Fimage%2Fupload%2Ff_webp%2Fq_auto%3Abest%2Fv1628329121%2Fguagj5r2bkccgr1paez3.jpg&w=1920&q=75"
+                src="/img/farm.jpg"
                 alt=""
                 width={230}
                 height={230}
-                className="w-full"
+                className="object-cover w-full h-2/3"
               />
               <div className="font-bold px-10 py-4 text-center">
                 Trang trại và thiên nhiên
@@ -98,17 +98,17 @@ const PhanTrangTimKiem = () => {
             </Link>
             <Link
               href={"/"}
-              className="mx-auto border border-black border-opacity-10 rounded-lg overflow-hidden hover:shadow-[0px_0px_8px_2px_rgba(0,0,0,0.2)]"
+              className="mx-auto md:w-full border border-black border-opacity-10 rounded-lg overflow-hidden hover:shadow-[0px_0px_8px_2px_rgba(0,0,0,0.2)]"
             >
               <Image
-                src="https://rawn-airbnb.vercel.app/_next/image?url=https%3A%2F%2Fres.cloudinary.com%2Frawn%2Fimage%2Fupload%2Ff_webp%2Fq_auto%3Abest%2Fv1628329252%2Fgqhtg9ua6jdrffhbrfv1.jpg&w=1920&q=75"
+                src="/img/allow-pet.jpg"
                 alt=""
                 width={230}
                 height={230}
-                className="w-full"
+                className="object-cover w-full h-2/3"
               />
               <div className="font-bold px-10 py-4 text-center">
-                Cho phép mang theo chó
+                Cho phép mang thú cưng
               </div>
             </Link>
           </div>

@@ -56,6 +56,9 @@ const SearchComponent = () => {
   };
   const handleSubmitSearch = (e) => {
     e.preventDefault();
+    if (!viTri) {
+      return;
+    }
     router.push(
       `/list-city/${
         viTri == "quan-1" && tinhThanh == "Hồ Chí Minh" ? "quan-1-hcm" : viTri

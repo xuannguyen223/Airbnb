@@ -1,6 +1,6 @@
 // Xuan
 export const TOKEN_CYBERSOFT =
-  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0ZW5Mb3AiOiJCb290Y2FtcCA3NyIsIkhldEhhblN0cmluZyI6IjExLzA2LzIwMjUiLCJIZXRIYW5UaW1lIjoiMTc0OTYwMDAwMDAwMCIsIm5iZiI6MTcyMzIyMjgwMCwiZXhwIjoxNzQ5NzQ3NjAwfQ.waDB5mLZD-y9f0trHQhyWJiBNYXsC97HRlepmNYJKXE";
+  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0ZW5Mb3AiOiJGbHV0dGVyIDAyIiwiSGV0SGFuU3RyaW5nIjoiMTkvMDEvMjAyNiIsIkhldEhhblRpbWUiOiIxNzY4NzgwODAwMDAwIiwibmJmIjoxNzQ0ODI2NDAwLCJleHAiOjE3Njg5MzIwMDB9.ufCXKn3-gGj8L5tWc2dyWHcIF8IKX89M5Nejp9t_fS0";
 export const DOMAIN = "https://airbnbnew.cybersoft.edu.vn/";
 export const GROUP_ID = "GP00";
 export const REGISTER_API = "/api/auth/signup";
@@ -26,7 +26,7 @@ export const MOCK_API_USER_ACCOUNT = "userAccounts";
 // -----
 // Anh Duc
 export const tokenCyberSoft =
-  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0ZW5Mb3AiOiJCb290Y2FtcCA3NyIsIkhldEhhblN0cmluZyI6IjExLzA2LzIwMjUiLCJIZXRIYW5UaW1lIjoiMTc0OTYwMDAwMDAwMCIsIm5iZiI6MTcyMzIyMjgwMCwiZXhwIjoxNzQ5NzQ3NjAwfQ.waDB5mLZD-y9f0trHQhyWJiBNYXsC97HRlepmNYJKXE";
+  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0ZW5Mb3AiOiJGbHV0dGVyIDAyIiwiSGV0SGFuU3RyaW5nIjoiMTkvMDEvMjAyNiIsIkhldEhhblRpbWUiOiIxNzY4NzgwODAwMDAwIiwibmJmIjoxNzQ0ODI2NDAwLCJleHAiOjE3Njg5MzIwMDB9.ufCXKn3-gGj8L5tWc2dyWHcIF8IKX89M5Nejp9t_fS0";
 export const Domain = "https://airbnbnew.cybersoft.edu.vn";
 export const tinhThanhToIdMap = {
   "quan-1-hcm": "1",

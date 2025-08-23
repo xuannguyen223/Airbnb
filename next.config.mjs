@@ -20,6 +20,18 @@ const nextConfig = {
         hostname: "rawn-airbnb.vercel.app",
         pathname: "**",
       },
+      {
+        protocol: "https",
+        port: "",
+        hostname: "encrypted-tbn0.gstatic.com",
+        pathname: "**",
+      },
+      {
+        protocol: "https",
+        port: "",
+        hostname: "thesinhcafetouronline.com",
+        pathname: "**",
+      },
     ],
   },
 };
